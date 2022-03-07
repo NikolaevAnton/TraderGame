@@ -10,7 +10,6 @@
 		4EFFC16327D6511C00F15A5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC16227D6511C00F15A5A /* AppDelegate.swift */; };
 		4EFFC16527D6511C00F15A5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC16427D6511C00F15A5A /* SceneDelegate.swift */; };
 		4EFFC16727D6511C00F15A5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC16627D6511C00F15A5A /* ViewController.swift */; };
-		4EFFC16A27D6511C00F15A5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EFFC16827D6511C00F15A5A /* Main.storyboard */; };
 		4EFFC16C27D6511E00F15A5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EFFC16B27D6511E00F15A5A /* Assets.xcassets */; };
 		4EFFC16F27D6511E00F15A5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EFFC16D27D6511E00F15A5A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,7 +19,6 @@
 		4EFFC16227D6511C00F15A5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EFFC16427D6511C00F15A5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4EFFC16627D6511C00F15A5A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4EFFC16927D6511C00F15A5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4EFFC16B27D6511E00F15A5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4EFFC16E27D6511E00F15A5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4EFFC17027D6511E00F15A5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,15 +54,62 @@
 		4EFFC16127D6511C00F15A5A /* TraderGame */ = {
 			isa = PBXGroup;
 			children = (
-				4EFFC16227D6511C00F15A5A /* AppDelegate.swift */,
-				4EFFC16427D6511C00F15A5A /* SceneDelegate.swift */,
-				4EFFC16627D6511C00F15A5A /* ViewController.swift */,
-				4EFFC16827D6511C00F15A5A /* Main.storyboard */,
-				4EFFC16B27D6511E00F15A5A /* Assets.xcassets */,
-				4EFFC16D27D6511E00F15A5A /* LaunchScreen.storyboard */,
-				4EFFC17027D6511E00F15A5A /* Info.plist */,
+				4EFFC17D27D659FC00F15A5A /* Services */,
+				4EFFC17C27D659F100F15A5A /* Models */,
+				4EFFC17927D6596E00F15A5A /* Scenes */,
+				4EFFC17727D6589E00F15A5A /* App */,
 			);
 			path = TraderGame;
+			sourceTree = "<group>";
+		};
+		4EFFC17727D6589E00F15A5A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				4EFFC17027D6511E00F15A5A /* Info.plist */,
+				4EFFC16D27D6511E00F15A5A /* LaunchScreen.storyboard */,
+				4EFFC16B27D6511E00F15A5A /* Assets.xcassets */,
+				4EFFC16427D6511C00F15A5A /* SceneDelegate.swift */,
+				4EFFC16227D6511C00F15A5A /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		4EFFC17927D6596E00F15A5A /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				4EFFC17B27D659A100F15A5A /* MainScene */,
+				4EFFC17A27D6598700F15A5A /* Settings */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		4EFFC17A27D6598700F15A5A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4EFFC16627D6511C00F15A5A /* ViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		4EFFC17B27D659A100F15A5A /* MainScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MainScene;
+			sourceTree = "<group>";
+		};
+		4EFFC17C27D659F100F15A5A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4EFFC17D27D659FC00F15A5A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +172,6 @@
 			files = (
 				4EFFC16F27D6511E00F15A5A /* LaunchScreen.storyboard in Resources */,
 				4EFFC16C27D6511E00F15A5A /* Assets.xcassets in Resources */,
-				4EFFC16A27D6511C00F15A5A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,14 +191,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4EFFC16827D6511C00F15A5A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4EFFC16927D6511C00F15A5A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4EFFC16D27D6511E00F15A5A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -290,10 +326,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TraderGame/Info.plist;
+				INFOPLIST_FILE = TraderGame/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -305,7 +340,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -317,10 +352,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TraderGame/Info.plist;
+				INFOPLIST_FILE = TraderGame/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -332,7 +366,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

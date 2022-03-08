@@ -12,6 +12,9 @@
 		4EFFC16727D6511C00F15A5A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC16627D6511C00F15A5A /* SettingsViewController.swift */; };
 		4EFFC16C27D6511E00F15A5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EFFC16B27D6511E00F15A5A /* Assets.xcassets */; };
 		4EFFC16F27D6511E00F15A5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EFFC16D27D6511E00F15A5A /* LaunchScreen.storyboard */; };
+		4EFFC17F27D783DF00F15A5A /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC17E27D783DF00F15A5A /* Crypto.swift */; };
+		4EFFC18127D7869E00F15A5A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC18027D7869E00F15A5A /* NetworkManager.swift */; };
+		4EFFC18327D78A3C00F15A5A /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC18227D78A3C00F15A5A /* SettingsPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		4EFFC16B27D6511E00F15A5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4EFFC16E27D6511E00F15A5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4EFFC17027D6511E00F15A5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EFFC17E27D783DF00F15A5A /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
+		4EFFC18027D7869E00F15A5A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4EFFC18227D78A3C00F15A5A /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				4EFFC16627D6511C00F15A5A /* SettingsViewController.swift */,
+				4EFFC18227D78A3C00F15A5A /* SettingsPresenter.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -101,6 +108,7 @@
 		4EFFC17C27D659F100F15A5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4EFFC17E27D783DF00F15A5A /* Crypto.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -108,6 +116,7 @@
 		4EFFC17D27D659FC00F15A5A /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4EFFC18027D7869E00F15A5A /* NetworkManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -182,9 +191,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EFFC17F27D783DF00F15A5A /* Crypto.swift in Sources */,
 				4EFFC16727D6511C00F15A5A /* SettingsViewController.swift in Sources */,
+				4EFFC18127D7869E00F15A5A /* NetworkManager.swift in Sources */,
 				4EFFC16327D6511C00F15A5A /* AppDelegate.swift in Sources */,
 				4EFFC16527D6511C00F15A5A /* SceneDelegate.swift in Sources */,
+				4EFFC18327D78A3C00F15A5A /* SettingsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,8 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    var presenter: SettingsPresenterProtocol!
+    
 //MARK: - UI Elements
     private lazy var mainLabel: UILabel = {
         let label = UILabel()
@@ -27,6 +29,7 @@ class SettingsViewController: UIViewController {
 //MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = SettingsPresenter(view: self)
         view.backgroundColor = UIColor(named: "LightGray")
         addSubviewsAndSetConstraints()
     }
@@ -53,7 +56,7 @@ class SettingsViewController: UIViewController {
     }
 //MARK: - Command methods
     @objc private func downloadValuesInCurrentDay() {
-        
+        presenter.loadValuesInCurrentDay()
     }
 }
 
@@ -67,5 +70,14 @@ extension UIButton {
         button.backgroundColor = UIColor(named: "LightBlue")
         button.layer.cornerRadius = 10
     }
+}
+
+//MARK: - MVP extension
+extension SettingsViewController: SettingsViewProtocol {
+    func presentValuesInCurrentDay(_ values: [Crypto]) {
+        print("Succses!!!!! load: \(values.count)")
+    }
+    
+    
 }
 

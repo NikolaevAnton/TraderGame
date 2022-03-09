@@ -30,4 +30,12 @@ class DownloadData {
     func getCountCrypto() -> Int {
         cryptoArrays.count
     }
+    
+    func getFirstValue() -> String {
+        guard let first = cryptoArrays.first else {
+            return "no first element"
+        }
+        let dicription = "\(first.name ?? "no name") \(first.priceUsd ?? "no price") \(first.symbol ?? "no symbol")"
+        return dicription
+    }
 }

@@ -14,10 +14,7 @@ class SettingsViewController: UIViewController {
 //MARK: - UI Elements
     private lazy var mainLabel: UILabel = {
         let label = UILabel()
-        label.text = "панель управления"
-        label.textAlignment = .center
-        label.font = .boldSystemFont(ofSize: 25)
-        label.textColor = UIColor(named: "Dark")
+        label.creatorLabel(title: "панель управления")
         return label
     }()
     private lazy var downloadValuesInCurrentDayButton: UIButton = {
@@ -31,6 +28,19 @@ class SettingsViewController: UIViewController {
         indicator.color = UIColor(named: "Dark")
         indicator.style = .large
         return indicator
+    }()
+    private lazy var downloadAllValuesInOneYearHistoryButton: UIButton = {
+        let button = UIButton()
+        button.creatorButton(title: "История за год")
+        button.isHidden = true
+        button.addTarget(self, action: #selector(downloadAllValuesInOneYearHistory), for: .touchUpInside)
+        return button
+    }()
+    private lazy var infoAboutLoadValuesLabel: UILabel = {
+        let label = UILabel()
+        label.creatorLabel(title: "")
+        label.isHidden = true
+        return label
     }()
 //MARK: - ViewController Life Cycle
     override func viewDidLoad() {
@@ -65,11 +75,29 @@ class SettingsViewController: UIViewController {
             activityIndicator.topAnchor.constraint(equalTo: mainLabel.topAnchor, constant: 50),
             activityIndicator.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
+        view.addSubview(downloadAllValuesInOneYearHistoryButton)
+        downloadAllValuesInOneYearHistoryButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            downloadAllValuesInOneYearHistoryButton.topAnchor.constraint(equalTo: downloadValuesInCurrentDayButton.topAnchor, constant: 40),
+            downloadAllValuesInOneYearHistoryButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            downloadAllValuesInOneYearHistoryButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -150)
+        ])
+        view.addSubview(infoAboutLoadValuesLabel)
+        infoAboutLoadValuesLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            infoAboutLoadValuesLabel.topAnchor.constraint(equalTo: downloadAllValuesInOneYearHistoryButton.topAnchor, constant: 40),
+            infoAboutLoadValuesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            infoAboutLoadValuesLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
+        ])
     }
 //MARK: - Command methods
     @objc private func downloadValuesInCurrentDay() {
         activityIndicator.startAnimating()
         presenter.loadValuesInCurrentDay()
+    }
+    
+    @objc private func downloadAllValuesInOneYearHistory() {
+        presenter.getValueInArray()
     }
 }
 
@@ -84,16 +112,33 @@ extension UIButton {
         button.layer.cornerRadius = 10
     }
 }
+extension UILabel {
+    func creatorLabel(title: String) {
+        let label = self
+        label.text = title
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: 25)
+        label.textColor = UIColor(named: "Dark")
+    }
+}
 
 //MARK: - MVP extension
 extension SettingsViewController: SettingsViewProtocol {
+
     func presentCountValuesInCurrentDay(_ countValues: Int) {
         print("Succses!!!!! load: \(countValues)")
         activityIndicator.stopAnimating()
         downloadValuesInCurrentDayButton.layer.opacity = 0.5
         downloadValuesInCurrentDayButton.isEnabled = true
+        downloadAllValuesInOneYearHistoryButton.isHidden = false
     }
     
+    func getFirstElementInCryptoArrray(discription: String) {
+        print(discription)
+        infoAboutLoadValuesLabel.isHidden = false
+        infoAboutLoadValuesLabel.text = discription
+    }
     
 }
 

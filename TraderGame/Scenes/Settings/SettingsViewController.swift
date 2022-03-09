@@ -97,7 +97,8 @@ class SettingsViewController: UIViewController {
     }
     
     @objc private func downloadAllValuesInOneYearHistory() {
-        presenter.getValueInArray()
+        activityIndicator.startAnimating()
+        presenter.loadValuesInOneYearHistory()
     }
 }
 
@@ -126,6 +127,8 @@ extension UILabel {
 //MARK: - MVP extension
 extension SettingsViewController: SettingsViewProtocol {
 
+    
+
     func presentCountValuesInCurrentDay(_ countValues: Int) {
         print("Succses!!!!! load: \(countValues)")
         activityIndicator.stopAnimating()
@@ -134,11 +137,13 @@ extension SettingsViewController: SettingsViewProtocol {
         downloadAllValuesInOneYearHistoryButton.isHidden = false
     }
     
-    func getFirstElementInCryptoArrray(discription: String) {
-        print(discription)
+    func presentCountValuesInOneYearHistory(_ countValues: Int) {
+        print("count values in one year history: \(countValues)")
+        activityIndicator.stopAnimating()
+        downloadAllValuesInOneYearHistoryButton.layer.opacity = 0.5
+        downloadAllValuesInOneYearHistoryButton.isEnabled = true
         infoAboutLoadValuesLabel.isHidden = false
-        infoAboutLoadValuesLabel.text = discription
+        infoAboutLoadValuesLabel.text = "count values in one year history: \(countValues)"
     }
-    
 }
 

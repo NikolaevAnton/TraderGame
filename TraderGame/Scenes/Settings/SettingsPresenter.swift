@@ -9,13 +9,13 @@ import Foundation
 
 protocol SettingsViewProtocol: AnyObject {
     func presentCountValuesInCurrentDay(_ countValues: Int)
-    func getFirstElementInCryptoArrray(discription: String)
+    func presentCountValuesInOneYearHistory(_ countValues: Int)
 }
 
 protocol SettingsPresenterProtocol {
     init(view: SettingsViewProtocol)
     func loadValuesInCurrentDay()
-    func getValueInArray()
+    func loadValuesInOneYearHistory()
 }
 
 class SettingsPresenter: SettingsPresenterProtocol {
@@ -31,7 +31,9 @@ class SettingsPresenter: SettingsPresenterProtocol {
             view.presentCountValuesInCurrentDay(DownloadData.shared.getCountCrypto())
         }
     }
-    func getValueInArray() {
-        view.getFirstElementInCryptoArrray(discription: DownloadData.shared.getFirstValue())
+    func loadValuesInOneYearHistory() {
+        DownloadData.shared.downloadValuesInOneYearHistory { [unowned self] in
+            view.presentCountValuesInOneYearHistory(DownloadData.shared.getCountAllValuesOnYearHistory())
+        }
     }
 }

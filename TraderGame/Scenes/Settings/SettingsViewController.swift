@@ -26,6 +26,12 @@ class SettingsViewController: UIViewController {
         button.addTarget(self, action: #selector(downloadValuesInCurrentDay), for: .touchUpInside)
         return button
     }()
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.color = UIColor(named: "Dark")
+        indicator.style = .large
+        return indicator
+    }()
 //MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,9 +59,16 @@ class SettingsViewController: UIViewController {
             downloadValuesInCurrentDayButton.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor, constant: -150)
         ])
+        view.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicator.topAnchor.constraint(equalTo: mainLabel.topAnchor, constant: 50),
+            activityIndicator.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
     }
 //MARK: - Command methods
     @objc private func downloadValuesInCurrentDay() {
+        activityIndicator.startAnimating()
         presenter.loadValuesInCurrentDay()
     }
 }
@@ -74,8 +87,11 @@ extension UIButton {
 
 //MARK: - MVP extension
 extension SettingsViewController: SettingsViewProtocol {
-    func presentValuesInCurrentDay(_ values: [Crypto]) {
-        print("Succses!!!!! load: \(values.count)")
+    func presentCountValuesInCurrentDay(_ countValues: Int) {
+        print("Succses!!!!! load: \(countValues)")
+        activityIndicator.stopAnimating()
+        downloadValuesInCurrentDayButton.layer.opacity = 0.5
+        downloadValuesInCurrentDayButton.isEnabled = true
     }
     
     

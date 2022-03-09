@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SettingsViewProtocol: AnyObject {
-    func presentValuesInCurrentDay(_ values: [Crypto])
+    func presentCountValuesInCurrentDay(_ countValues: Int)
 }
 
 protocol SettingsPresenterProtocol {
@@ -28,7 +28,7 @@ class SettingsPresenter: SettingsPresenterProtocol {
             switch result {
             case .success(let data):
                 let dataCrypto = data.data ?? []
-                view.presentValuesInCurrentDay(dataCrypto)
+                view.presentCountValuesInCurrentDay(dataCrypto.count)
             case .failure(let error):
                 print(error)
             }

@@ -24,14 +24,9 @@ class SettingsPresenter: SettingsPresenterProtocol {
     }
     
     func loadValuesInCurrentDay() {
-        NetworkManager.shared.fetchCrypto(dataType: AllAssetsDescription.self, from: Link.allAssets.rawValue) { [unowned self] result in
-            switch result {
-            case .success(let data):
-                let dataCrypto = data.data ?? []
-                view.presentCountValuesInCurrentDay(dataCrypto.count)
-            case .failure(let error):
-                print(error)
-            }
+        DownloadData.shared.downloadValuesInCurrentDay() {[unowned self] in
+            view.presentCountValuesInCurrentDay(DownloadData.shared.getCountCrypto())
         }
+
     }
 }

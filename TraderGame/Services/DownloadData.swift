@@ -29,6 +29,20 @@ class DownloadData {
         }
     }
     
+    func downloadValuesInOneYearHistory(completion: @escaping() -> Void) {
+        creatArrayValuesCryptoInOneYearHistory()
+        for (index, _) in cryptoArrayOneYearHistory.enumerated() {
+            let link = cryptoArrayOneYearHistory[index].urlString
+            downloadHistory(link: link) { valuesInCurrentDay in
+                self.cryptoArrayOneYearHistory[index].values = valuesInCurrentDay
+                if index == self.cryptoArrayOneYearHistory.count - 1 {
+                    completion()
+                }
+            }
+        }
+    }
+    
+//MARK: - Getter methods for present values
     func getCountCrypto() -> Int {
         cryptoArrays.count
     }
@@ -41,16 +55,12 @@ class DownloadData {
         return count
     }
     
-    func downloadValuesInOneYearHistory(completion: @escaping() -> Void) {
-        creatArrayValuesCryptoInOneYearHistory()
-        for (index, _) in cryptoArrayOneYearHistory.enumerated() {
-            let link = cryptoArrayOneYearHistory[index].urlString
-            downloadHistory(link: link) { valuesInCurrentDay in
-                self.cryptoArrayOneYearHistory[index].values = valuesInCurrentDay
-                if index == self.cryptoArrayOneYearHistory.count - 1 {
-                    completion()
-                }
-            }
+//MARK: - Test methods
+    func testDescriptionForCheckDownloadValues() {
+        guard let cryptoHistory = cryptoArrayOneYearHistory.last else { return }
+        print("Name: \(cryptoHistory.name) Link: \(cryptoHistory.urlString)")
+        cryptoHistory.values.forEach { value in
+            print("Rate: \(value.rate) Date: \(value.date)")
         }
     }
     

@@ -34,6 +34,7 @@ class SettingsPresenter: SettingsPresenterProtocol {
     func loadValuesInOneYearHistory() {
         DownloadData.shared.downloadValuesInOneYearHistory { [unowned self] in
             view.presentCountValuesInOneYearHistory(DownloadData.shared.getCountAllValuesOnYearHistory())
+            DownloadData.shared.testDescriptionForCheckDownloadValues()
         }
     }
 }

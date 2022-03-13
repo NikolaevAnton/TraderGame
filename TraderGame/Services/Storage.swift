@@ -10,8 +10,9 @@ import Foundation
 class Storage {
     static let shared = Storage()
     private let downloadData: DownloadData!
-    private var valuesInCurrentDay: [StorageValuesForEachDay] = []
+    private var arrayValuesInCurrentDayOneYearHistory: [StorageValuesForEachDay] = []
     private var calendar: [Date] = []
+    private var namesCrypto: [String] = []
     
     private init() {
         downloadData = DownloadData.shared.self
@@ -19,6 +20,14 @@ class Storage {
         print("min calendar: \(String(describing: calendar.first))")
         print("max calendar: \(String(describing: calendar.last))")
         createValuesInCurrentDay()
+        getCryptoPriceInArrayAllValues()
+        createNames()
+
+    }
+    
+//MARK: - getter result analiz array AllValuesRateForCurrentCrypto
+    func getArrayValues() -> [StorageValuesForEachDay] {
+        arrayValuesInCurrentDayOneYearHistory
     }
     
 //MARK: - private func create array values crypto in current day in one year history
@@ -35,7 +44,29 @@ class Storage {
         })
     }
     
+    private func createNames() {
+        var namesInThisDay = [String]()
+        var namesInFirstDay = [String]()
+        let thisDayValues = arrayValuesInCurrentDayOneYearHistory[calendar.endIndex - 1]
+        let firstDayValuse = arrayValuesInCurrentDayOneYearHistory[0]
+        thisDayValues.values.forEach { valueCrypto in
+            namesInThisDay.append(valueCrypto.name)
+        }
+        firstDayValuse.values.forEach { valueCrypto in
+            namesInFirstDay.append(valueCrypto.name)
+        }
+        print("in \(calendar.endIndex) crypto names: \(namesInThisDay.count)")
+        print("in \(calendar[0]) crypto names: \(namesInFirstDay.count)")
+        
+    }
+    
     private func createValuesInCurrentDay() {
+        calendar.forEach { day in
+            arrayValuesInCurrentDayOneYearHistory.append(StorageValuesForEachDay(date: day, values: []))
+        }
+    }
+    
+    private func getCryptoPriceInArrayAllValues() {
         downloadData.getAllValues().forEach { allValues in
             let name = allValues.name
             allValues.values.forEach { valueInCurrentDay in
@@ -47,8 +78,29 @@ class Storage {
                 }
                 let valueCrypto = ValueCrypto(name: name, price: price, count: nil)
                 let date = valueInCurrentDay.date
-                print("name: \(valueCrypto.name) price: \(valueCrypto.price) date: \(date)")
+                updateValuesInCurrentDay(value: valueCrypto, date: date)
             }
         }
     }
+    
+    private func updateValuesInCurrentDay(value: ValueCrypto, date: Date) {
+        guard let index = calendar.firstIndex(of: date) else { return }
+        let valuesInCurrentDay = arrayValuesInCurrentDayOneYearHistory[index].values
+        if !isContaintsValueInCurrentDay(values: valuesInCurrentDay, seachValue: value) {
+            arrayValuesInCurrentDayOneYearHistory[index].values.append(value)
+        }
+    }
+    
+    private func isContaintsValueInCurrentDay(values: [ValueCrypto], seachValue: ValueCrypto) -> Bool {
+        if values.isEmpty {
+            return false
+        }
+        for valueCrypto in values {
+            if valueCrypto.name == seachValue.name {
+                return true
+            }
+        }
+        return false
+    }
+
 }

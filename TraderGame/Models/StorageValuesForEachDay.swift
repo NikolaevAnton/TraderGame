@@ -9,7 +9,7 @@ import Foundation
 
 struct StorageValuesForEachDay {
     let date: Date
-    let values: [ValueCrypto]
+    var values: [ValueCrypto]
 }
 
 struct ValueCrypto {

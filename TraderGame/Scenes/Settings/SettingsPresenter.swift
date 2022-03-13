@@ -10,16 +10,17 @@ import Foundation
 protocol SettingsViewProtocol: AnyObject {
     func presentCountValuesInCurrentDay(_ countValues: Int)
     func presentCountValuesInOneYearHistory(_ countValues: Int)
+    func presentResultForSortValues(_ countValues: Int)
 }
 
 protocol SettingsPresenterProtocol {
     init(view: SettingsViewProtocol)
     func loadValuesInCurrentDay()
     func loadValuesInOneYearHistory()
+    func sortValuesInOneYearHistory()
 }
 
 class SettingsPresenter: SettingsPresenterProtocol {
-    
     unowned let view: SettingsViewProtocol
     
     required init(view: SettingsViewProtocol) {
@@ -34,7 +35,12 @@ class SettingsPresenter: SettingsPresenterProtocol {
     func loadValuesInOneYearHistory() {
         DownloadData.shared.downloadValuesInOneYearHistory { [unowned self] in
             view.presentCountValuesInOneYearHistory(DownloadData.shared.getCountAllValuesOnYearHistory())
-            DownloadData.shared.testDescriptionForCheckDownloadValues()
+            //DownloadData.shared.testDescriptionForCheckDownloadValues()
         }
+    }
+    
+    func sortValuesInOneYearHistory() {
+        view.presentResultForSortValues(0)
+        let _ = Storage.shared
     }
 }

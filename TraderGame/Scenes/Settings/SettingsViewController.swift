@@ -42,6 +42,13 @@ class SettingsViewController: UIViewController {
         label.isHidden = true
         return label
     }()
+    private lazy var sortValuesButton: UIButton = {
+        let button = UIButton()
+        button.creatorButton(title: "Отстортировать")
+        button.isHidden = true
+        button.addTarget(self, action: #selector(sortValues), for: .touchUpInside)
+        return button
+    }()
 //MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +96,13 @@ class SettingsViewController: UIViewController {
             infoAboutLoadValuesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             infoAboutLoadValuesLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
         ])
+        view.addSubview(sortValuesButton)
+        sortValuesButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            sortValuesButton.topAnchor.constraint(equalTo: infoAboutLoadValuesLabel.bottomAnchor, constant: 30),
+            sortValuesButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            sortValuesButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -150)
+        ])
     }
 //MARK: - Command methods
     @objc private func downloadValuesInCurrentDay() {
@@ -99,6 +113,11 @@ class SettingsViewController: UIViewController {
     @objc private func downloadAllValuesInOneYearHistory() {
         activityIndicator.startAnimating()
         presenter.loadValuesInOneYearHistory()
+    }
+    
+    @objc private func sortValues() {
+        activityIndicator.startAnimating()
+        presenter.sortValuesInOneYearHistory()
     }
 }
 
@@ -127,8 +146,6 @@ extension UILabel {
 //MARK: - MVP extension
 extension SettingsViewController: SettingsViewProtocol {
 
-    
-
     func presentCountValuesInCurrentDay(_ countValues: Int) {
         print("Succses!!!!! load: \(countValues)")
         activityIndicator.stopAnimating()
@@ -144,6 +161,14 @@ extension SettingsViewController: SettingsViewProtocol {
         downloadAllValuesInOneYearHistoryButton.isEnabled = true
         infoAboutLoadValuesLabel.isHidden = false
         infoAboutLoadValuesLabel.text = "count values in one year history: \(countValues)"
+        sortValuesButton.isHidden = false
+    }
+    
+    func presentResultForSortValues(_ countValues: Int) {
+        print("Sort values!")
+        activityIndicator.stopAnimating()
+        sortValuesButton.layer.opacity = 0.5
+        sortValuesButton.isEnabled = true
     }
 }
 

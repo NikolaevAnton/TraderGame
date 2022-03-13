@@ -55,6 +55,10 @@ class DownloadData {
         return count
     }
     
+    func getAllValues() -> [AllValuesRateForCurrentCrypto] {
+        cryptoArrayOneYearHistory
+    }
+    
 //MARK: - Test methods
     func testDescriptionForCheckDownloadValues() {
         guard let cryptoHistory = cryptoArrayOneYearHistory.last else { return }

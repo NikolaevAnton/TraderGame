@@ -40,7 +40,7 @@ class SettingsPresenter: SettingsPresenterProtocol {
     }
     
     func sortValuesInOneYearHistory() {
-        view.presentResultForSortValues(0)
-        let _ = Storage.shared
+        let storage = Storage.shared
+        view.presentResultForSortValues(storage.getCountValuesCrypto())
     }
 }

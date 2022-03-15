@@ -169,6 +169,7 @@ extension SettingsViewController: SettingsViewProtocol {
         activityIndicator.stopAnimating()
         sortValuesButton.layer.opacity = 0.5
         sortValuesButton.isEnabled = true
+        infoAboutLoadValuesLabel.text?.append("\nsorted array. number of values in every day: \(countValues)")
     }
 }
 

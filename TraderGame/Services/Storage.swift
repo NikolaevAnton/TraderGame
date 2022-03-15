@@ -16,8 +16,8 @@ class Storage {
     private init() {
         downloadData = DownloadData.shared.self
         createCalendar()
-        print("min calendar: \(String(describing: calendar.first))")
-        print("max calendar: \(String(describing: calendar.last))")
+        //print("min calendar: \(String(describing: calendar.first))")
+        //print("max calendar: \(String(describing: calendar.last))")
         createValuesInCurrentDay()
         getCryptoPriceInArrayAllValues()
         seachMinimumCryptoArray()
@@ -25,8 +25,9 @@ class Storage {
     }
     
 //MARK: - getter result analiz array AllValuesRateForCurrentCrypto
-    func getArrayValues() -> [StorageValuesForEachDay] {
-        arrayValuesInCurrentDayOneYearHistory
+    func getCountValuesCrypto() -> Int {
+        guard let array = arrayValuesInCurrentDayOneYearHistory.first else { return 0}
+        return array.values.count
     }
     
 //MARK: - private func create array values crypto in current day in one year history

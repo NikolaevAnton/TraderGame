@@ -12,7 +12,6 @@ class Storage {
     private let downloadData: DownloadData!
     private var arrayValuesInCurrentDayOneYearHistory: [StorageValuesForEachDay] = []
     private var calendar: [Date] = []
-    private var namesCrypto: [String] = []
     
     private init() {
         downloadData = DownloadData.shared.self
@@ -21,7 +20,7 @@ class Storage {
         print("max calendar: \(String(describing: calendar.last))")
         createValuesInCurrentDay()
         getCryptoPriceInArrayAllValues()
-        createNames()
+        seachMinimumCryptoArray()
 
     }
     
@@ -31,7 +30,7 @@ class Storage {
     }
     
 //MARK: - private func create array values crypto in current day in one year history
-    
+
     private func createCalendar() {
         var days = Set<Date>()
         for allValues in downloadData.getAllValues() {
@@ -42,22 +41,6 @@ class Storage {
         calendar = days.sorted(by: { min, max in
             min < max
         })
-    }
-    
-    private func createNames() {
-        var namesInThisDay = [String]()
-        var namesInFirstDay = [String]()
-        let thisDayValues = arrayValuesInCurrentDayOneYearHistory[calendar.endIndex - 1]
-        let firstDayValuse = arrayValuesInCurrentDayOneYearHistory[0]
-        thisDayValues.values.forEach { valueCrypto in
-            namesInThisDay.append(valueCrypto.name)
-        }
-        firstDayValuse.values.forEach { valueCrypto in
-            namesInFirstDay.append(valueCrypto.name)
-        }
-        print("in \(calendar.endIndex) crypto names: \(namesInThisDay.count)")
-        print("in \(calendar[0]) crypto names: \(namesInFirstDay.count)")
-        
     }
     
     private func createValuesInCurrentDay() {
@@ -102,5 +85,72 @@ class Storage {
         }
         return false
     }
+    
+//due to loading errors, the array of values ​​may be different
+//therefore, it is necessary to find such an array of cryptocurrencies that will be every day
+
+    private func seachMinimumCryptoArray() {
+        var tempValues = transcryptValuesCryptoToString(thisDayArray: arrayValuesInCurrentDayOneYearHistory[0].values)
+        
+        for index in 1..<calendar.count {
+            let nextDayValues = transcryptValuesCryptoToString(thisDayArray: arrayValuesInCurrentDayOneYearHistory[index].values)
+            let arrayWithMinimumValues = compareArrays(array1: tempValues, array2: nextDayValues)
+            tempValues = arrayWithMinimumValues
+        }
+        
+        changeArrayValuesInCurrentDayOneYearHistory(arrayNames: tempValues)
+        /*
+        arrayValuesInCurrentDayOneYearHistory.forEach { storageValuesForEachDay in
+            print("day: \(storageValuesForEachDay.date) array values count: \(storageValuesForEachDay.values.count)")
+        }
+         */
+    }
+    
+    private func transcryptValuesCryptoToString(thisDayArray: [ValueCrypto]) -> [String] {
+        var arrayString = [String]()
+        thisDayArray.forEach { valueCrypto in
+            arrayString.append(valueCrypto.name)
+        }
+        return arrayString
+    }
+    
+    private func compareArrays(array1: [String], array2: [String]) -> [String] {
+        var compared = [String]()
+        
+        if array1.count < array2.count {
+            array1.forEach { element in
+                if array2.contains(element) {
+                    compared.append(element)
+                }
+            }
+        } else {
+            array2.forEach { element in
+                if array1.contains(element) {
+                    compared.append(element)
+                }
+            }
+        }
+        
+        return compared
+    }
+    
+    private func changeArrayValuesInCurrentDayOneYearHistory(arrayNames: [String]) {
+        for index in 0 ..< arrayValuesInCurrentDayOneYearHistory.count {
+            let currentDayValues = arrayValuesInCurrentDayOneYearHistory[index].values
+            arrayValuesInCurrentDayOneYearHistory[index].values = returnMinimumValueCryptoArray(valuesCrypto: currentDayValues, arrayNames: arrayNames)
+        }
+    }
+    
+    private func returnMinimumValueCryptoArray(valuesCrypto: [ValueCrypto], arrayNames: [String]) -> [ValueCrypto] {
+        var minimumValueCrypto = [ValueCrypto]()
+        valuesCrypto.forEach { valueCrypto in
+            if arrayNames.contains(valueCrypto.name) {
+                minimumValueCrypto.append(valueCrypto)
+            }
+        }
+        return minimumValueCrypto
+    }
+    
+    
 
 }

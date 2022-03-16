@@ -49,6 +49,13 @@ class SettingsViewController: UIViewController {
         button.addTarget(self, action: #selector(sortValues), for: .touchUpInside)
         return button
     }()
+    private lazy var goToMainVCButton: UIButton = {
+        let button = UIButton()
+        button.creatorButton(title: "Показать значения")
+        button.isHidden = true
+        button.addTarget(self, action: #selector(goToMainVC), for: .touchUpInside)
+        return button
+    }()
 //MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +110,13 @@ class SettingsViewController: UIViewController {
             sortValuesButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             sortValuesButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -150)
         ])
+        view.addSubview(goToMainVCButton)
+        goToMainVCButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            goToMainVCButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
+            goToMainVCButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
+            goToMainVCButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100)
+        ])
     }
 //MARK: - Command methods
     @objc private func downloadValuesInCurrentDay() {
@@ -118,6 +132,10 @@ class SettingsViewController: UIViewController {
     @objc private func sortValues() {
         activityIndicator.startAnimating()
         presenter.sortValuesInOneYearHistory()
+    }
+    
+    @objc private func goToMainVC() {
+        
     }
 }
 
@@ -170,6 +188,7 @@ extension SettingsViewController: SettingsViewProtocol {
         sortValuesButton.layer.opacity = 0.5
         sortValuesButton.isEnabled = true
         infoAboutLoadValuesLabel.text?.append("\nsorted array. number of values in every day: \(countValues)")
+        goToMainVCButton.isHidden = false
     }
 }
 

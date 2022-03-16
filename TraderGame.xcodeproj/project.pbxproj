@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4E7CBD9B27DDD27300F651A0 /* StorageValuesForEachDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7CBD9A27DDD27300F651A0 /* StorageValuesForEachDay.swift */; };
 		4E7CBD9D27DDD4E600F651A0 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7CBD9C27DDD4E600F651A0 /* Storage.swift */; };
+		4E7CBD9F27E1D60F00F651A0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7CBD9E27E1D60F00F651A0 /* MainViewController.swift */; };
+		4E7CBDA127E1E04000F651A0 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7CBDA027E1E04000F651A0 /* MainPresenter.swift */; };
 		4EFFC16327D6511C00F15A5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC16227D6511C00F15A5A /* AppDelegate.swift */; };
 		4EFFC16527D6511C00F15A5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC16427D6511C00F15A5A /* SceneDelegate.swift */; };
 		4EFFC16727D6511C00F15A5A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC16627D6511C00F15A5A /* SettingsViewController.swift */; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		4E7CBD9A27DDD27300F651A0 /* StorageValuesForEachDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageValuesForEachDay.swift; sourceTree = "<group>"; };
 		4E7CBD9C27DDD4E600F651A0 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		4E7CBD9E27E1D60F00F651A0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		4E7CBDA027E1E04000F651A0 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		4EFFC15F27D6511C00F15A5A /* TraderGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TraderGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EFFC16227D6511C00F15A5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EFFC16427D6511C00F15A5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 		4EFFC17B27D659A100F15A5A /* MainScene */ = {
 			isa = PBXGroup;
 			children = (
+				4E7CBD9E27E1D60F00F651A0 /* MainViewController.swift */,
+				4E7CBDA027E1E04000F651A0 /* MainPresenter.swift */,
 			);
 			path = MainScene;
 			sourceTree = "<group>";
@@ -204,11 +210,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E7CBD9B27DDD27300F651A0 /* StorageValuesForEachDay.swift in Sources */,
+				4E7CBD9F27E1D60F00F651A0 /* MainViewController.swift in Sources */,
 				4EFFC17F27D783DF00F15A5A /* Crypto.swift in Sources */,
 				4EFFC16727D6511C00F15A5A /* SettingsViewController.swift in Sources */,
 				4EFFC18127D7869E00F15A5A /* NetworkManager.swift in Sources */,
 				4EFFC16327D6511C00F15A5A /* AppDelegate.swift in Sources */,
 				4EFFC18727D8E37900F15A5A /* SortCrypto.swift in Sources */,
+				4E7CBDA127E1E04000F651A0 /* MainPresenter.swift in Sources */,
 				4EFFC18527D89AF500F15A5A /* DownloadData.swift in Sources */,
 				4EFFC16527D6511C00F15A5A /* SceneDelegate.swift in Sources */,
 				4EFFC18327D78A3C00F15A5A /* SettingsPresenter.swift in Sources */,

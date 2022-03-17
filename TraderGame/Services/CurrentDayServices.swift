@@ -76,22 +76,19 @@ class CurrentDayServices {
     
 //MARK: - Support private methods for sorting values
     private func getAscendingArray(values: [ValueCrypto]) -> [ValueCrypto] {
-        print("ascending")
-        return values.sorted { valueCryptoOne, valueCryptoSecond in
+        values.sorted { valueCryptoOne, valueCryptoSecond in
             valueCryptoSecond.price.isLess(than: valueCryptoOne.price)
         }
     }
     
     private func getDescendingValues(values: [ValueCrypto]) -> [ValueCrypto] {
-        print("descending")
-        return values.sorted { valueCryptoOne, valueCryptoSecond in
+        values.sorted { valueCryptoOne, valueCryptoSecond in
             valueCryptoOne.price.isLess(than: valueCryptoSecond.price)
         }
     }
     
     private func getWithoutOrder(values: [ValueCrypto]) -> [ValueCrypto] {
-        print("shuffled")
-        return values.shuffled()
+        values.shuffled()
     }
     
 }

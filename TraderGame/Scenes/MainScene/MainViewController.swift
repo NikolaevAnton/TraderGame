@@ -15,6 +15,8 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
     private var numbersRowsInSecondSection = 0
     private var arrayValuesYoyMoney = [String]()
     private var arrayValuesCrypto = [String]()
+    private var dateString = ""
+    private var sortString = ""
     
 //MARK: - UI Elements
     private lazy var tableView: UITableView = {
@@ -22,6 +24,7 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
         tableView.backgroundColor = UIColor(named: "LightGray")
         return tableView
     }()
+    /*
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.creatorLabel(title: "")
@@ -30,6 +33,12 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
     private lazy var sortLabel: UILabel = {
         let label = UILabel()
         label.creatorLabel(title: "Sort:")
+        return label
+    }()
+     */
+    private var infoLabel: UILabel = {
+        let label = UILabel()
+        label.creatorLabel(title: "")
         return label
     }()
 
@@ -51,30 +60,24 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
     
     private func addSubviewsAndSetConstraints() {
 
-        view.addSubview(dateLabel)
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(infoLabel)
+        infoLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
-            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            //dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
+            infoLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 35),
+            infoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            infoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
         ])
-        
-        view.addSubview(sortLabel)
-        sortLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            sortLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
-            sortLabel.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor, constant: 30),
-            sortLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
-        ])
-        
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: dateLabel.topAnchor, constant: 30),
+            tableView.topAnchor.constraint(equalTo: infoLabel.topAnchor, constant: 40),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70)
         ])
+        
+
     }
 
 
@@ -161,7 +164,8 @@ extension MainViewController : MainViewProtocol {
     }
     
     func presenterLoadStringValueForDate(value: String) {
-        dateLabel.text = value
+        dateString = value
+        infoLabel.text = "\(dateString) Sort: \(sortString)"
     }
     
     func presentSort(sort: String) {
@@ -174,8 +178,8 @@ extension MainViewController : MainViewProtocol {
         default:
             sortValue = "shufle"
         }
-        sortLabel.text = " Sort: \(sortValue)"
-        sortLabel.font = .boldSystemFont(ofSize: 20)
+        sortString = sortValue
+        infoLabel.text = "\(dateString) Sort: \(sortString)"
         tableView.reloadData()
     }
 }

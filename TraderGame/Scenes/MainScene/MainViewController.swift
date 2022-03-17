@@ -31,6 +31,12 @@ class MainViewController: UIViewController {
         bar.items = [item]
         return bar
     }()
+    
+    private lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.creatorLabel(title: "")
+        return label
+    }()
 
  
 //MARK: - ViewController Life Cycle
@@ -40,6 +46,7 @@ class MainViewController: UIViewController {
         view.backgroundColor = UIColor(named: "LightGray")
         presenter.loadValuesInCurrentDay()
         presenter.loadStringValuesCrypto()
+        presenter.loadStringValueDate()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -52,13 +59,20 @@ class MainViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         let size = CGSize(width: view.frame.size.width, height: view.frame.size.height - 120)
         tableView.frame = CGRect.init(origin: .zero, size: size)
+        
         view.addSubview(navigationBar)
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             navigationBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
             navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+        ])
+        view.addSubview(dateLabel)
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            dateLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
         ])
     }
 
@@ -126,5 +140,9 @@ extension MainViewController : MainViewProtocol {
     func presentStringsValuesCrypto(valuesYouMoney: [String], valuesCrypto: [String]) {
         arrayValuesYoyMoney = valuesYouMoney
         arrayValuesCrypto = valuesCrypto
+    }
+    
+    func presenterLoadStringValueForDate(value: String) {
+        dateLabel.text = value
     }
 }

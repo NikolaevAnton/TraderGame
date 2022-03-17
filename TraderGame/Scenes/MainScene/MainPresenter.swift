@@ -9,6 +9,7 @@ import Foundation
 protocol MainViewProtocol: AnyObject {
     func presentCountValuesInCurrentDay(countValuesYourCrypto: Int, countValuesInternetCrypto: Int)
     func presentStringsValuesCrypto(valuesYouMoney: [String], valuesCrypto: [String])
+    func presenterLoadStringValueForDate(value: String)
 
 }
 
@@ -16,11 +17,12 @@ protocol MainPresenterProtocol {
     init(view: MainViewProtocol)
     func loadValuesInCurrentDay()
     func loadStringValuesCrypto()
+    func loadStringValueDate()
 
 }
 
 class MainPresenter: MainPresenterProtocol {
-
+    
     private var day = 0
     unowned let view: MainViewProtocol
     private let currentDayServices = CurrentDayServices()
@@ -42,5 +44,8 @@ class MainPresenter: MainPresenterProtocol {
             valuesCrypto: currentDayServices.getStringValuesInArrayCryptoData(in: day))
     }
     
+    func loadStringValueDate() {
+        view.presenterLoadStringValueForDate(value: currentDayServices.getStringValueDate(in: day))
+    }
     
 }

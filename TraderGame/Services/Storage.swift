@@ -44,6 +44,17 @@ class Storage {
         arrayYourCrypto
     }
     
+    func getDayInCalendar(day: Int) -> Date {
+        let check = 0..<364
+        var seachDate = Date()
+        if !check.contains(day) {
+            print("wrong number of date")
+        } else {
+            seachDate = calendar[day]
+        }
+        return seachDate
+    }
+    
 //MARK: - create your money
         private func createYourMoney() {
             var price = Decimal()

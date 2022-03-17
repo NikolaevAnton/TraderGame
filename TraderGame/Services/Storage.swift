@@ -11,17 +11,16 @@ class Storage {
     static let shared = Storage()
     private let downloadData: DownloadData!
     private var arrayValuesInCurrentDayOneYearHistory: [StorageValuesForEachDay] = []
+    private var arrayYourCrypto: [ValueCrypto] = []
     private var calendar: [Date] = []
     
     private init() {
         downloadData = DownloadData.shared.self
         createCalendar()
-        //print("min calendar: \(String(describing: calendar.first))")
-        //print("max calendar: \(String(describing: calendar.last))")
+        createYourMoney()
         createValuesInCurrentDay()
         getCryptoPriceInArrayAllValues()
         seachMinimumCryptoArray()
-
     }
     
 //MARK: - getter result analiz array AllValuesRateForCurrentCrypto
@@ -30,6 +29,35 @@ class Storage {
         return array.values.count
     }
     
+    func getStorageInCurrentDay(numberOfDay: Int) -> [ValueCrypto] {
+        let check = 0..<364
+        var array = [ValueCrypto]()
+        if !check.contains(numberOfDay) {
+            print("wrong number of date")
+            array = arrayValuesInCurrentDayOneYearHistory[0].values
+        }
+        array = arrayValuesInCurrentDayOneYearHistory[numberOfDay].values
+        return array
+    }
+    
+    func getYourMoneyInCurrentDay() -> [ValueCrypto] {
+        arrayYourCrypto
+    }
+    
+//MARK: - create your money
+        private func createYourMoney() {
+            var price = Decimal()
+            var count = Decimal()
+            do {
+                price = try Decimal("1", format: .number)
+                count = try Decimal("10000", format: .number)
+            } catch {
+                price = Decimal()
+                count = Decimal()
+            }
+            let dollars = ValueCrypto(name: "Dollar", price: price, count: count)
+            arrayYourCrypto.append(dollars)
+        }
 //MARK: - private func create array values crypto in current day in one year history
 
     private func createCalendar() {

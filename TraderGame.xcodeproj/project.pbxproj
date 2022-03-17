@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E774E8827E23CD80002AB69 /* CurrentDayServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E774E8727E23CD80002AB69 /* CurrentDayServices.swift */; };
 		4E7CBD9B27DDD27300F651A0 /* StorageValuesForEachDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7CBD9A27DDD27300F651A0 /* StorageValuesForEachDay.swift */; };
 		4E7CBD9D27DDD4E600F651A0 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7CBD9C27DDD4E600F651A0 /* Storage.swift */; };
 		4E7CBD9F27E1D60F00F651A0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7CBD9E27E1D60F00F651A0 /* MainViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E774E8727E23CD80002AB69 /* CurrentDayServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDayServices.swift; sourceTree = "<group>"; };
 		4E7CBD9A27DDD27300F651A0 /* StorageValuesForEachDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageValuesForEachDay.swift; sourceTree = "<group>"; };
 		4E7CBD9C27DDD4E600F651A0 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		4E7CBD9E27E1D60F00F651A0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				4EFFC18027D7869E00F15A5A /* NetworkManager.swift */,
 				4EFFC18427D89AF500F15A5A /* DownloadData.swift */,
 				4E7CBD9C27DDD4E600F651A0 /* Storage.swift */,
+				4E774E8727E23CD80002AB69 /* CurrentDayServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				4EFFC16327D6511C00F15A5A /* AppDelegate.swift in Sources */,
 				4EFFC18727D8E37900F15A5A /* SortCrypto.swift in Sources */,
 				4E7CBDA127E1E04000F651A0 /* MainPresenter.swift in Sources */,
+				4E774E8827E23CD80002AB69 /* CurrentDayServices.swift in Sources */,
 				4EFFC18527D89AF500F15A5A /* DownloadData.swift in Sources */,
 				4EFFC16527D6511C00F15A5A /* SceneDelegate.swift in Sources */,
 				4EFFC18327D78A3C00F15A5A /* SettingsPresenter.swift in Sources */,

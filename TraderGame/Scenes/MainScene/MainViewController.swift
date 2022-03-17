@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, UINavigationBarDelegate {
 
     var presenter: MainPresenterProtocol!
     private let cellID = "cell"
@@ -22,16 +22,6 @@ class MainViewController: UIViewController {
         tableView.backgroundColor = UIColor(named: "LightGray")
         return tableView
     }()
-    
-    private lazy var navigationBar: UINavigationBar = {
-        let bar = UINavigationBar()
-        let item = UINavigationItem(title: "Сортировка валют")
-        let button = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(sort))
-        item.setRightBarButton(button, animated: true)
-        bar.items = [item]
-        return bar
-    }()
-    
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.creatorLabel(title: "")
@@ -42,6 +32,7 @@ class MainViewController: UIViewController {
 //MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        createToolBar()
         self.presenter = MainPresenter(view: self)
         view.backgroundColor = UIColor(named: "LightGray")
         presenter.loadValuesInCurrentDay()
@@ -58,30 +49,35 @@ class MainViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         let size = CGSize(width: view.frame.size.width, height: view.frame.size.height - 120)
         tableView.frame = CGRect.init(origin: .zero, size: size)
-        
-        view.addSubview(navigationBar)
-        navigationBar.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            navigationBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
-            navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
-        ])
-        
+
         view.addSubview(dateLabel)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            dateLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            dateLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
             dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
         ])
     }
 
 
+    private func createToolBar() {
+        self.navigationController?.isToolbarHidden = false
+        var items = [UIBarButtonItem]()
+        items.append( UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(sort)) )
+        items.append( UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(nextDay)) )
+        self.toolbarItems = items
+    }
     
 //MARK: - Command methods
 
     @objc private func sort() {
-        
+        print("sort")
+    }
+    
+    @objc private func nextDay() {
+        print("next day")
+        presenter.changeDay()
+        tableView.reloadData()
     }
 }
 

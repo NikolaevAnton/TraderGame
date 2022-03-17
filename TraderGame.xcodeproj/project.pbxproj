@@ -109,10 +109,10 @@
 		4EFFC17927D6596E00F15A5A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				4E774E8C27E364800002AB69 /* NavigationViewController.swift */,
 				4E774E8927E35C510002AB69 /* DetailScene */,
 				4EFFC17B27D659A100F15A5A /* MainScene */,
 				4EFFC17A27D6598700F15A5A /* Settings */,
-				4E774E8C27E364800002AB69 /* NavigationViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";

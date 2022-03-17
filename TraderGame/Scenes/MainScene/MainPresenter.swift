@@ -18,11 +18,12 @@ protocol MainPresenterProtocol {
     func loadValuesInCurrentDay()
     func loadStringValuesCrypto()
     func loadStringValueDate()
+    func changeDay()
 
 }
 
 class MainPresenter: MainPresenterProtocol {
-    
+
     private var day = 0
     unowned let view: MainViewProtocol
     private let currentDayServices = CurrentDayServices()
@@ -48,4 +49,9 @@ class MainPresenter: MainPresenterProtocol {
         view.presenterLoadStringValueForDate(value: currentDayServices.getStringValueDate(in: day))
     }
     
+    func changeDay() {
+        day += 1
+        loadStringValuesCrypto()
+        loadStringValueDate()
+    }
 }

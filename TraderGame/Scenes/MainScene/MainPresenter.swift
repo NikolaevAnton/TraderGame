@@ -10,7 +10,7 @@ protocol MainViewProtocol: AnyObject {
     func presentCountValuesInCurrentDay(countValuesYourCrypto: Int, countValuesInternetCrypto: Int)
     func presentStringsValuesCrypto(valuesYouMoney: [String], valuesCrypto: [String])
     func presenterLoadStringValueForDate(value: String)
-
+    func presentSort(sort: String)
 }
 
 protocol MainPresenterProtocol {
@@ -19,11 +19,19 @@ protocol MainPresenterProtocol {
     func loadStringValuesCrypto()
     func loadStringValueDate()
     func changeDay()
+    func sortValues()
 
+}
+
+enum KindOfSorting: String {
+    case inAscendingOrder
+    case descendingValues
+    case withoutOrder
 }
 
 class MainPresenter: MainPresenterProtocol {
 
+    private var kindOfSorting: KindOfSorting = .withoutOrder
     private var day = 0
     unowned let view: MainViewProtocol
     private let currentDayServices = CurrentDayServices()
@@ -53,5 +61,32 @@ class MainPresenter: MainPresenterProtocol {
         day += 1
         loadStringValuesCrypto()
         loadStringValueDate()
+    }
+    
+    func sortValues() {
+        switch kindOfSorting {
+        case .inAscendingOrder:
+            kindOfSorting = .descendingValues
+        case .descendingValues:
+            kindOfSorting = .withoutOrder
+        case .withoutOrder:
+            kindOfSorting = .inAscendingOrder
+        }
+        print(kindOfSorting.rawValue)
+        changeKindOfSorting()
+        loadStringValuesCrypto()
+        view.presentSort(sort: kindOfSorting.rawValue)
+    }
+    
+    private func changeKindOfSorting() {
+        
+        switch kindOfSorting {
+        case .inAscendingOrder:
+            currentDayServices.ascendingOrder()
+        case .descendingValues:
+            currentDayServices.descendingValues()
+        case .withoutOrder:
+            currentDayServices.withoutOrder()
+        }
     }
 }

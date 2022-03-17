@@ -27,6 +27,11 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
         label.creatorLabel(title: "")
         return label
     }()
+    private lazy var sortLabel: UILabel = {
+        let label = UILabel()
+        label.creatorLabel(title: "Sort:")
+        return label
+    }()
 
  
 //MARK: - ViewController Life Cycle
@@ -51,7 +56,15 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
         NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
             dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
+            //dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
+        ])
+        
+        view.addSubview(sortLabel)
+        sortLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            sortLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
+            sortLabel.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor, constant: 30),
+            sortLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
         
         view.addSubview(tableView)
@@ -79,10 +92,10 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
 
     @objc private func sort() {
         print("sort")
+        presenter.sortValues()
     }
     
     @objc private func nextDay() {
-        print("next day")
         presenter.changeDay()
         tableView.reloadData()
     }
@@ -149,5 +162,20 @@ extension MainViewController : MainViewProtocol {
     
     func presenterLoadStringValueForDate(value: String) {
         dateLabel.text = value
+    }
+    
+    func presentSort(sort: String) {
+        var sortValue = ""
+        switch sort {
+        case "inAscendingOrder":
+            sortValue = "acending"
+        case "descendingValues":
+            sortValue = "descending"
+        default:
+            sortValue = "shufle"
+        }
+        sortLabel.text = " Sort: \(sortValue)"
+        sortLabel.font = .boldSystemFont(ofSize: 20)
+        tableView.reloadData()
     }
 }

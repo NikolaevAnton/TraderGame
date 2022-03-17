@@ -55,20 +55,29 @@ class Storage {
         return seachDate
     }
     
+    func getCountCalendar() -> Int {
+        calendar.count
+    }
+    
+//MARK: - Set change result
+    func setChangeResult(values: [ValueCrypto], day: Int) {
+        arrayValuesInCurrentDayOneYearHistory[day].values = values
+    }
+    
 //MARK: - create your money
-        private func createYourMoney() {
-            var price = Decimal()
-            var count = Decimal()
-            do {
-                price = try Decimal("1", format: .number)
-                count = try Decimal("10000", format: .number)
-            } catch {
-                price = Decimal()
-                count = Decimal()
-            }
-            let dollars = ValueCrypto(name: "Dollar", price: price, count: count)
-            arrayYourCrypto.append(dollars)
+    private func createYourMoney() {
+        var price = Decimal()
+        var count = Decimal()
+        do {
+            price = try Decimal("1", format: .number)
+            count = try Decimal("10000", format: .number)
+        } catch {
+            price = Decimal()
+            count = Decimal()
         }
+        let dollars = ValueCrypto(name: "Dollar", price: price, count: count)
+        arrayYourCrypto.append(dollars)
+    }
 //MARK: - private func create array values crypto in current day in one year history
 
     private func createCalendar() {
@@ -139,11 +148,7 @@ class Storage {
         }
         
         changeArrayValuesInCurrentDayOneYearHistory(arrayNames: tempValues)
-        /*
-        arrayValuesInCurrentDayOneYearHistory.forEach { storageValuesForEachDay in
-            print("day: \(storageValuesForEachDay.date) array values count: \(storageValuesForEachDay.values.count)")
-        }
-         */
+
     }
     
     private func transcryptValuesCryptoToString(thisDayArray: [ValueCrypto]) -> [String] {

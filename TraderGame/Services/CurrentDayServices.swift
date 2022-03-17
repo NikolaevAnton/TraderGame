@@ -8,7 +8,13 @@
 import Foundation
 class CurrentDayServices {
     private let sharedStorage = Storage.shared
-    
+    private let diapason: [Int]!
+
+    init() {
+        diapason = Array(0..<sharedStorage.getCountCalendar())
+    }
+
+//MARK: - Getters
     func getCountCryptoValuesInCurrentDay(day: Int) -> Int {
         sharedStorage.getStorageInCurrentDay(numberOfDay: day).count
     }
@@ -42,6 +48,50 @@ class CurrentDayServices {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YY, MMM d"
         return dateFormatter.string(from: date)
+    }
+    
+//MARK: - Sorting Values
+    func ascendingOrder() {
+        diapason.forEach { day in
+            let valuesInCurrentDay = sharedStorage.getStorageInCurrentDay(numberOfDay: day)
+            sharedStorage.setChangeResult(values: getAscendingArray(values: valuesInCurrentDay), day: day)
+        }
+    }
+    
+    func descendingValues() {
+        diapason.forEach { day in
+            let valuesInCurrentDay = sharedStorage.getStorageInCurrentDay(numberOfDay: day)
+            sharedStorage.setChangeResult(
+                values: getDescendingValues(values: valuesInCurrentDay), day: day)
+        }
+    }
+    
+    func withoutOrder() {
+        diapason.forEach { day in
+            let valuesInCurrentDay = sharedStorage.getStorageInCurrentDay(numberOfDay: day)
+            sharedStorage.setChangeResult(
+                values: getWithoutOrder(values: valuesInCurrentDay), day: day)
+        }
+    }
+    
+//MARK: - Support private methods for sorting values
+    private func getAscendingArray(values: [ValueCrypto]) -> [ValueCrypto] {
+        print("ascending")
+        return values.sorted { valueCryptoOne, valueCryptoSecond in
+            valueCryptoSecond.price.isLess(than: valueCryptoOne.price)
+        }
+    }
+    
+    private func getDescendingValues(values: [ValueCrypto]) -> [ValueCrypto] {
+        print("descending")
+        return values.sorted { valueCryptoOne, valueCryptoSecond in
+            valueCryptoOne.price.isLess(than: valueCryptoSecond.price)
+        }
+    }
+    
+    private func getWithoutOrder(values: [ValueCrypto]) -> [ValueCrypto] {
+        print("shuffled")
+        return values.shuffled()
     }
     
 }

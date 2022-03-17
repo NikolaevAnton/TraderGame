@@ -45,17 +45,22 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
     }
     
     private func addSubviewsAndSetConstraints() {
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        let size = CGSize(width: view.frame.size.width, height: view.frame.size.height - 120)
-        tableView.frame = CGRect.init(origin: .zero, size: size)
 
         view.addSubview(dateLabel)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
+            dateLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
             dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
+        ])
+        
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: dateLabel.topAnchor, constant: 30),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70)
         ])
     }
 

@@ -135,10 +135,14 @@ class SettingsViewController: UIViewController {
     }
     
     @objc private func goToMainVC() {
+        /*
         let mainViewController = MainViewController()
         mainViewController.modalPresentationStyle = .fullScreen
         self.present(mainViewController, animated: true)
-        
+        */
+        let navigationView = NavigationViewController()
+        navigationView.modalPresentationStyle = .fullScreen
+        self.present(navigationView, animated: true)
     }
 }
 

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4E774E8827E23CD80002AB69 /* CurrentDayServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E774E8727E23CD80002AB69 /* CurrentDayServices.swift */; };
+		4E774E8B27E35D2F0002AB69 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E774E8A27E35D2F0002AB69 /* DetailViewController.swift */; };
+		4E774E8D27E364800002AB69 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E774E8C27E364800002AB69 /* NavigationViewController.swift */; };
 		4E7CBD9B27DDD27300F651A0 /* StorageValuesForEachDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7CBD9A27DDD27300F651A0 /* StorageValuesForEachDay.swift */; };
 		4E7CBD9D27DDD4E600F651A0 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7CBD9C27DDD4E600F651A0 /* Storage.swift */; };
 		4E7CBD9F27E1D60F00F651A0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7CBD9E27E1D60F00F651A0 /* MainViewController.swift */; };
@@ -26,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		4E774E8727E23CD80002AB69 /* CurrentDayServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDayServices.swift; sourceTree = "<group>"; };
+		4E774E8A27E35D2F0002AB69 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		4E774E8C27E364800002AB69 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		4E7CBD9A27DDD27300F651A0 /* StorageValuesForEachDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageValuesForEachDay.swift; sourceTree = "<group>"; };
 		4E7CBD9C27DDD4E600F651A0 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		4E7CBD9E27E1D60F00F651A0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E774E8927E35C510002AB69 /* DetailScene */ = {
+			isa = PBXGroup;
+			children = (
+				4E774E8A27E35D2F0002AB69 /* DetailViewController.swift */,
+			);
+			path = DetailScene;
+			sourceTree = "<group>";
+		};
 		4EFFC15627D6511C00F15A5A = {
 			isa = PBXGroup;
 			children = (
@@ -97,8 +109,10 @@
 		4EFFC17927D6596E00F15A5A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				4E774E8927E35C510002AB69 /* DetailScene */,
 				4EFFC17B27D659A100F15A5A /* MainScene */,
 				4EFFC17A27D6598700F15A5A /* Settings */,
+				4E774E8C27E364800002AB69 /* NavigationViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -215,6 +229,7 @@
 				4E7CBD9B27DDD27300F651A0 /* StorageValuesForEachDay.swift in Sources */,
 				4E7CBD9F27E1D60F00F651A0 /* MainViewController.swift in Sources */,
 				4EFFC17F27D783DF00F15A5A /* Crypto.swift in Sources */,
+				4E774E8D27E364800002AB69 /* NavigationViewController.swift in Sources */,
 				4EFFC16727D6511C00F15A5A /* SettingsViewController.swift in Sources */,
 				4EFFC18127D7869E00F15A5A /* NetworkManager.swift in Sources */,
 				4EFFC16327D6511C00F15A5A /* AppDelegate.swift in Sources */,
@@ -225,6 +240,7 @@
 				4EFFC16527D6511C00F15A5A /* SceneDelegate.swift in Sources */,
 				4EFFC18327D78A3C00F15A5A /* SettingsPresenter.swift in Sources */,
 				4E7CBD9D27DDD4E600F651A0 /* Storage.swift in Sources */,
+				4E774E8B27E35D2F0002AB69 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

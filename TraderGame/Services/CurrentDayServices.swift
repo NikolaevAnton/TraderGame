@@ -40,7 +40,7 @@ class CurrentDayServices {
     func getStringValueDate(in day: Int) -> String {
         let date = sharedStorage.getDayInCalendar(day: day)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YY/MM/dd"
+        dateFormatter.dateFormat = "YY, MMM d"
         return dateFormatter.string(from: date)
     }
     

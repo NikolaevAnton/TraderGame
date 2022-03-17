@@ -51,7 +51,6 @@ class MainViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         addSubviewsAndSetConstraints()
- 
     }
     
     private func addSubviewsAndSetConstraints() {
@@ -67,6 +66,7 @@ class MainViewController: UIViewController {
             navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
+        
         view.addSubview(dateLabel)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -127,6 +127,8 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let detail = DetailViewController()
+        navigationController?.pushViewController(detail, animated: true)
     }
 }
 //MARK: - MVP extension

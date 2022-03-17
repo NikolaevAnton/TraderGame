@@ -68,8 +68,10 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
     private func createToolBar() {
         self.navigationController?.isToolbarHidden = false
         var items = [UIBarButtonItem]()
-        items.append( UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(sort)) )
-        items.append( UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(nextDay)) )
+        let sortButton = UIBarButtonItem(title: "Sort values", style: .plain, target: self, action:  #selector(sort))
+        let nextDayButton = UIBarButtonItem(title: "Next day", style: .plain, target: self, action: #selector(nextDay))
+        items.append(sortButton)
+        items.append(nextDayButton)
         self.toolbarItems = items
     }
     

@@ -20,6 +20,18 @@ class DetailViewController: UIViewController {
         label.textAlignment = .left
         return label
     }()
+    private var buyButton: UIButton = {
+        let button = UIButton()
+        button.creatorButton(title: "Buy")
+        button.addTarget(self, action: #selector(buy), for: .touchUpInside)
+        return button
+    }()
+    private var sellButton: UIButton = {
+        let button = UIButton()
+        button.creatorButton(title: "Sell")
+        button.addTarget(self, action: #selector(sell), for: .touchUpInside)
+        return button
+    }()
 //MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +55,38 @@ class DetailViewController: UIViewController {
         ])
         
 
+        view.addSubview(buyButton)
+        buyButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            buyButton.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: -20),
+            buyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            buyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+        ])
+        
+        view.addSubview(sellButton)
+        sellButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            sellButton.topAnchor.constraint(equalTo: buyButton.bottomAnchor, constant: 10),
+            sellButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            sellButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+        ])
+        
+
+    }
+    
+//MARK: - command method
+
+    @objc private func buy() {
+        
+    }
+    
+    @objc private func sell() {
+        
     }
 
 }
+
+
 
 extension DetailViewController: DetailViewProtocol {
     func presentCrypto(name: String, price: String, count: String?) {

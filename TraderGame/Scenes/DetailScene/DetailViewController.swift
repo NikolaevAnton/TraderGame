@@ -38,6 +38,11 @@ class DetailViewController: UIViewController {
         button.addTarget(self, action: #selector(sell), for: .touchUpInside)
         return button
     }()
+    private var textField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .white
+        return textField
+    }()
 //MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +52,7 @@ class DetailViewController: UIViewController {
         presenter.setDate(day: day)
         presenter.getCryptoValue()
         presenter.getChangeHistory()
+        presenter.setMaxCount()
         addSubviewsAndSetConstraints()
     }
     
@@ -84,6 +90,14 @@ class DetailViewController: UIViewController {
             changeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
         ])
         
+        view.addSubview(textField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            textField.topAnchor.constraint(equalTo: changeLabel.topAnchor, constant: 50),
+            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+        ])
+        
 
     }
     
@@ -102,8 +116,7 @@ class DetailViewController: UIViewController {
 
 
 extension DetailViewController: DetailViewProtocol {
-    
-    
+
     func presentCrypto(name: String, price: String, count: String?) {
         infoLabel.text?.append("DATE: \(day ?? "")\n")
         infoLabel.text?.append("NAME: \(name)\n")
@@ -131,6 +144,10 @@ extension DetailViewController: DetailViewProtocol {
             changeLabel.text?.append("currency fell by a percentage: \(change)")
             changeLabel.textColor = UIColor(named: "Red")
         }
+    }
+    
+    func presentMaxCount(maxCount: String) {
+        textField.placeholder = "max count: \(maxCount)"
     }
     
 }

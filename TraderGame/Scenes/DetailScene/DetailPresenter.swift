@@ -10,6 +10,7 @@ protocol DetailViewProtocol: AnyObject {
     func presentCrypto(name: String, price: String, count: String?)
     func presentWallet(name: String, price: String, count: String)
     func presentChangeCourse(change: Double)
+    func presentMaxCount(maxCount: String)
 }
 
 protocol DetailPresenterProtocol {
@@ -18,16 +19,18 @@ protocol DetailPresenterProtocol {
     func setDate(day: String)
     func getCryptoValue()
     func getChangeHistory()
+    func setMaxCount()
 }
 
 class DetailPresenter: DetailPresenterProtocol {
-
+    
     unowned let view: DetailViewProtocol
     private var isItYourWallet = true
     private var numberInArray = 0
     private var dayDate = ""
     private let wallet = WalletServices()
     private var crypto: ValueCrypto?
+    private var maxCount = 0.0
     
     required init(view: DetailViewProtocol) {
         self.view = view
@@ -65,6 +68,13 @@ class DetailPresenter: DetailPresenterProtocol {
     
     func getChangeHistory() {
         view.presentChangeCourse(change: wallet.getChangeCurrency(name: crypto?.name ?? "", date: dayDate))
+    }
+    
+    func setMaxCount() {
+        guard let crypto = crypto else { return }
+        let moneyInWallet = wallet.getValueCrypto(itIsYourMoney: true, number: 0, date: dayDate)
+        let maxCount = (moneyInWallet.count ?? Decimal()) / crypto.price
+        view.presentMaxCount(maxCount: "\(NSDecimalNumber(decimal: maxCount).doubleValue)")
     }
 }
 

@@ -55,6 +55,18 @@ class Storage {
         return seachDate
     }
     
+    func getNumberDayInCalendar(day: String) -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YY, MMM d"
+        for index in 0..<calendar.count {
+            let dayInCalendarString = dateFormatter.string(from: calendar[index])
+            if dayInCalendarString == day {
+                return index
+            }
+        }
+        return 0
+    }
+    
     func getCountCalendar() -> Int {
         calendar.count
     }

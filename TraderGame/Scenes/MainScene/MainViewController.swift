@@ -24,18 +24,6 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
         tableView.backgroundColor = UIColor(named: "LightGray")
         return tableView
     }()
-    /*
-    private lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.creatorLabel(title: "")
-        return label
-    }()
-    private lazy var sortLabel: UILabel = {
-        let label = UILabel()
-        label.creatorLabel(title: "Sort:")
-        return label
-    }()
-     */
     private var infoLabel: UILabel = {
         let label = UILabel()
         label.creatorLabel(title: "")
@@ -147,6 +135,8 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detail = DetailViewController()
+        detail.indexPath = indexPath
+        detail.day = dateString
         navigationController?.pushViewController(detail, animated: true)
     }
 }

@@ -8,6 +8,8 @@
 import Foundation
 protocol DetailViewProtocol: AnyObject {
     func presentCrypto(name: String, price: String, count: String?)
+    func presentWallet(name: String, price: String, count: String)
+    func presentChangeCourse(change: Double)
 }
 
 protocol DetailPresenterProtocol {
@@ -15,6 +17,7 @@ protocol DetailPresenterProtocol {
     func setIndexPath(index: IndexPath)
     func setDate(day: String)
     func getCryptoValue()
+    func getChangeHistory()
 }
 
 class DetailPresenter: DetailPresenterProtocol {
@@ -54,6 +57,14 @@ class DetailPresenter: DetailPresenterProtocol {
             count = "\(crypto.count ?? Decimal())"
         }
         view.presentCrypto(name: crypto.name, price: price, count: count)
+        let moneyInWallet = wallet.getValueCrypto(itIsYourMoney: true, number: 0, date: dayDate)
+        let priceWallet = "\(moneyInWallet.price)"
+        guard let countWallet = moneyInWallet.count else { return }
+        view.presentWallet(name: moneyInWallet.name, price: priceWallet, count: "\(countWallet)")
+    }
+    
+    func getChangeHistory() {
+        view.presentChangeCourse(change: 0.0)
     }
 }
 

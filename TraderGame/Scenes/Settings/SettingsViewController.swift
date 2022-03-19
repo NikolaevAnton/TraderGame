@@ -14,7 +14,7 @@ class SettingsViewController: UIViewController {
 //MARK: - UI Elements
     private lazy var mainLabel: UILabel = {
         let label = UILabel()
-        label.creatorLabel(title: "панель управления")
+        label.creatorLabel(title: "панель управления", size: 25)
         return label
     }()
     private lazy var downloadValuesInCurrentDayButton: UIButton = {
@@ -38,7 +38,7 @@ class SettingsViewController: UIViewController {
     }()
     private lazy var infoAboutLoadValuesLabel: UILabel = {
         let label = UILabel()
-        label.creatorLabel(title: "")
+        label.creatorLabel(title: "", size: 25)
         label.isHidden = true
         return label
     }()
@@ -158,12 +158,12 @@ extension UIButton {
     }
 }
 extension UILabel {
-    func creatorLabel(title: String) {
+    func creatorLabel(title: String, size: Int) {
         let label = self
         label.text = title
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.font = .boldSystemFont(ofSize: 25)
+        label.font = .boldSystemFont(ofSize: CGFloat(size))
         label.textColor = UIColor(named: "Dark")
     }
 }

@@ -26,7 +26,7 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
     }()
     private var infoLabel: UILabel = {
         let label = UILabel()
-        label.creatorLabel(title: "")
+        label.creatorLabel(title: "", size: 25)
         return label
     }()
 

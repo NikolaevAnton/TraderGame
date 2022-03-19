@@ -16,7 +16,13 @@ class DetailViewController: UIViewController {
 //MARK: - UI Elements
     private var infoLabel: UILabel = {
         let label = UILabel()
-        label.creatorLabel(title: "")
+        label.creatorLabel(title: "", size: 20)
+        label.textAlignment = .left
+        return label
+    }()
+    private var changeLabel: UILabel = {
+        let label = UILabel()
+        label.creatorLabel(title: "", size: 15)
         label.textAlignment = .left
         return label
     }()
@@ -35,13 +41,12 @@ class DetailViewController: UIViewController {
 //MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("view did load")
         view.backgroundColor = UIColor(named: "LightGray")
         presenter = DetailPresenter(view: self)
-        print("viewDidLoad. day: \(day ?? "") number: \(indexPath.row)")
         presenter.setIndexPath(index: indexPath)
         presenter.setDate(day: day)
         presenter.getCryptoValue()
+        presenter.getChangeHistory()
         addSubviewsAndSetConstraints()
     }
     
@@ -58,7 +63,7 @@ class DetailViewController: UIViewController {
         view.addSubview(buyButton)
         buyButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            buyButton.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: -20),
+            buyButton.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 10),
             buyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             buyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
@@ -69,6 +74,14 @@ class DetailViewController: UIViewController {
             sellButton.topAnchor.constraint(equalTo: buyButton.bottomAnchor, constant: 10),
             sellButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             sellButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+        ])
+        
+        view.addSubview(changeLabel)
+        changeLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            changeLabel.topAnchor.constraint(equalTo: sellButton.bottomAnchor, constant: 20),
+            changeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
+            changeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
         ])
         
 
@@ -89,6 +102,8 @@ class DetailViewController: UIViewController {
 
 
 extension DetailViewController: DetailViewProtocol {
+    
+    
     func presentCrypto(name: String, price: String, count: String?) {
         infoLabel.text?.append("DATE: \(day ?? "")\n")
         infoLabel.text?.append("NAME: \(name)\n")
@@ -100,5 +115,22 @@ extension DetailViewController: DetailViewProtocol {
         
     }
     
+    func presentWallet(name: String, price: String, count: String) {
+        infoLabel.text?.append("YOU WALLET:\n")
+        infoLabel.text?.append("NAME: \(name)\n")
+        infoLabel.text?.append("COUNT: \(count)")
+    }
+    
+    func presentChangeCourse(change: Double) {
+        print("presentChangeCourse \(change)")
+        if change >= 0.0 {
+            print("rose")
+            changeLabel.text?.append("currency rose by a percentage: \(change)")
+            changeLabel.textColor = UIColor(named: "Green")
+        } else {
+            changeLabel.text?.append("currency fell by a percentage: \(change)")
+            changeLabel.textColor = UIColor(named: "Red")
+        }
+    }
     
 }

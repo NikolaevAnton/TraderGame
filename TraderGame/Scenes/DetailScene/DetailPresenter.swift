@@ -64,7 +64,7 @@ class DetailPresenter: DetailPresenterProtocol {
     }
     
     func getChangeHistory() {
-        view.presentChangeCourse(change: 0.0)
+        view.presentChangeCourse(change: wallet.getChangeCurrency(name: crypto?.name ?? "", date: dayDate))
     }
 }
 

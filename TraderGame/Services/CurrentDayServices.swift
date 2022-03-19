@@ -50,6 +50,7 @@ class CurrentDayServices {
         return dateFormatter.string(from: date)
     }
     
+    
 //MARK: - Sorting Values
     func ascendingOrder() {
         diapason.forEach { day in

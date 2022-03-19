@@ -21,10 +21,33 @@ class WalletServices {
         if itIsYourMoney {
             valueCrypto = sharedStorage.getYourMoneyInCurrentDay()[number]
         } else {
-            print("wallet service. day: \(date)")
             valueCrypto = sharedStorage.getStorageInCurrentDay(numberOfDay: numberOfDay)[number]
-            print("value: \(valueCrypto.price)")
         }
         return valueCrypto
     }
+    
+    func getChangeCurrency(name: String, date: String) -> Double {
+        var changeCurrency = 0.0
+        let numberOfDay = sharedStorage.getNumberDayInCalendar(day: date)
+        let array = getCurrencyForCryptoForDay(name: name, numberDate: numberOfDay)
+        changeCurrency = (array[array.count - 1] - array[0]) / 100
+        return changeCurrency
+    }
+
+//MARK: - Support private methods
+    private func getCurrencyForCryptoForDay(name: String, numberDate: Int) -> [Double] {
+        var currency = [Double]()
+        for index in 0 ... numberDate {
+            let array = sharedStorage.getStorageInCurrentDay(numberOfDay: index)
+            var price = 0.0
+            array.forEach { valueCrypto in
+                if valueCrypto.name == name {
+                    price = NSDecimalNumber(decimal: valueCrypto.price).doubleValue
+                }
+            }
+            currency.append(price)
+        }
+        return currency
+    }
+    
 }

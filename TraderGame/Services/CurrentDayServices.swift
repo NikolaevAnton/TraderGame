@@ -50,6 +50,19 @@ class CurrentDayServices {
         return dateFormatter.string(from: date)
     }
     
+//MARK: - Change price in your walle
+    func changePrice(in day: Int) {
+        let value = sharedStorage.getStorageInCurrentDay(numberOfDay: day)
+        let valueInYourWallet = sharedStorage.getYourMoneyInCurrentDay()
+        for index in 0..<valueInYourWallet.count {
+            value.forEach { valueCrypto in
+                if valueInYourWallet[index].name == valueCrypto.name {
+                    sharedStorage.setNewPriceInYouWallet(name: valueCrypto.name, price: valueCrypto.price)
+                }
+            }
+        }
+    }
+    
     
 //MARK: - Sorting Values
     func ascendingOrder() {

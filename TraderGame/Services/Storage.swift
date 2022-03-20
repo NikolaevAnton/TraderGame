@@ -80,6 +80,10 @@ class Storage {
         calendar.count
     }
     
+    func getCountDollars() -> Decimal? {
+        arrayYourCrypto[0].count
+    }
+    
 //MARK: - Set change result
     func setChangeResult(values: [ValueCrypto], day: Int) {
         arrayValuesInCurrentDayOneYearHistory[day].values = values
@@ -104,6 +108,18 @@ class Storage {
                 } else {
                     arrayYourCrypto[index].count = value.count
                 }
+            }
+        }
+    }
+    
+    func changeDollarsCount(newCount: Decimal) {
+        arrayYourCrypto[0].count = newCount
+    }
+    
+    func setNewPriceInYouWallet(name: String, price: Decimal) {
+        for index in 0..<arrayYourCrypto.count {
+            if arrayYourCrypto[index].name == name {
+                arrayYourCrypto[index].price = price
             }
         }
     }

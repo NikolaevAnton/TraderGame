@@ -181,4 +181,8 @@ extension DetailViewController: DetailViewProtocol {
         textField.placeholder = "max count: \(maxCount)"
     }
     
+    func deleteOldValue() {
+        infoLabel.text = ""
+    }
+    
 }

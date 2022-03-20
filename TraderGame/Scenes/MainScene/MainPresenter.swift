@@ -57,10 +57,17 @@ class MainPresenter: MainPresenterProtocol {
         view.presenterLoadStringValueForDate(value: currentDayServices.getStringValueDate(in: day))
     }
     
+    func changePriceInYouWallet() {
+        currentDayServices.changePrice(in: day)
+        loadValuesInCurrentDay()
+        loadStringValuesCrypto()
+    }
+    
     func changeDay() {
         day += 1
         loadStringValuesCrypto()
         loadStringValueDate()
+        changePriceInYouWallet()
     }
     
     func sortValues() {

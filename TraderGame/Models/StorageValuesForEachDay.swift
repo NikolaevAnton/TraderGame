@@ -14,6 +14,6 @@ struct StorageValuesForEachDay {
 
 struct ValueCrypto {
     let name: String
-    let price: Decimal
+    var price: Decimal
     var count: Decimal?
 }

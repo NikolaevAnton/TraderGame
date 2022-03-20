@@ -33,6 +33,16 @@ class WalletServices {
         changeCurrency = (array[array.count - 1] - array[0]) / 100
         return changeCurrency
     }
+    
+    func changeYouWalletForBuyCurrency(crypto: ValueCrypto, count: Double) {
+        let countDecimal = Decimal(count)
+        let newCrypto = ValueCrypto(name: crypto.name, price: crypto.price, count: countDecimal)
+        guard let _ = sharedStorage.getYourMoneyInCurrentDay(name: crypto.name) else {
+            sharedStorage.uppendNewValueInYouMoneyForBuy(value: newCrypto)
+            return
+        }
+        sharedStorage.changeValueInYourMoneyForBuy(value: newCrypto)
+    }
 
 //MARK: - Support private methods
     private func getCurrencyForCryptoForDay(name: String, numberDate: Int) -> [Double] {

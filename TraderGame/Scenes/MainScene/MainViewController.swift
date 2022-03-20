@@ -46,6 +46,12 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
         addSubviewsAndSetConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        presenter.loadValuesInCurrentDay()
+        presenter.loadStringValuesCrypto()
+        tableView.reloadData()
+    }
+    
     private func addSubviewsAndSetConstraints() {
 
 
@@ -82,7 +88,6 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
 //MARK: - Command methods
 
     @objc private func sort() {
-        print("sort")
         presenter.sortValues()
     }
     

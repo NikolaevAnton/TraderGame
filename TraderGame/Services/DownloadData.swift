@@ -60,6 +60,7 @@ class DownloadData {
     }
     
 //MARK: - Test methods
+    /*
     func testDescriptionForCheckDownloadValues() {
         guard let cryptoHistory = cryptoArrayOneYearHistory.last else { return }
         print("Name: \(cryptoHistory.name) Link: \(cryptoHistory.urlString)")
@@ -67,7 +68,7 @@ class DownloadData {
             print("Rate: \(value.rate) Date: \(value.date)")
         }
     }
-    
+    */
 //MARK: - Support private methods
     private func creatArrayValuesCryptoInOneYearHistory() {
         cryptoArrays.forEach { crypto in

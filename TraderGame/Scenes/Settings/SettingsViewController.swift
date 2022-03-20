@@ -135,11 +135,6 @@ class SettingsViewController: UIViewController {
     }
     
     @objc private func goToMainVC() {
-        /*
-        let mainViewController = MainViewController()
-        mainViewController.modalPresentationStyle = .fullScreen
-        self.present(mainViewController, animated: true)
-        */
         let navigationView = NavigationViewController()
         navigationView.modalPresentationStyle = .fullScreen
         self.present(navigationView, animated: true)
@@ -172,7 +167,6 @@ extension UILabel {
 extension SettingsViewController: SettingsViewProtocol {
 
     func presentCountValuesInCurrentDay(_ countValues: Int) {
-        print("Succses!!!!! load: \(countValues)")
         activityIndicator.stopAnimating()
         downloadValuesInCurrentDayButton.layer.opacity = 0.5
         downloadValuesInCurrentDayButton.isEnabled = true
@@ -180,7 +174,6 @@ extension SettingsViewController: SettingsViewProtocol {
     }
     
     func presentCountValuesInOneYearHistory(_ countValues: Int) {
-        print("count values in one year history: \(countValues)")
         activityIndicator.stopAnimating()
         downloadAllValuesInOneYearHistoryButton.layer.opacity = 0.5
         downloadAllValuesInOneYearHistoryButton.isEnabled = true
@@ -190,7 +183,6 @@ extension SettingsViewController: SettingsViewProtocol {
     }
     
     func presentResultForSortValues(_ countValues: Int) {
-        print("Sort values!")
         activityIndicator.stopAnimating()
         sortValuesButton.layer.opacity = 0.5
         sortValuesButton.isEnabled = true

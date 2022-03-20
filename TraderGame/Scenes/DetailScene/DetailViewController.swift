@@ -12,6 +12,8 @@ class DetailViewController: UIViewController {
     var presenter: DetailPresenterProtocol!
     var indexPath: IndexPath!
     var day: String!
+    private var valueForTrade = ""
+    private var maxCountValue = 0.0
    
 //MARK: - UI Elements
     private var infoLabel: UILabel = {
@@ -41,6 +43,7 @@ class DetailViewController: UIViewController {
     private var textField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
+        textField.keyboardType = .numberPad
         return textField
     }()
 //MARK: - ViewController Life Cycle
@@ -52,7 +55,7 @@ class DetailViewController: UIViewController {
         presenter.setDate(day: day)
         presenter.getCryptoValue()
         presenter.getChangeHistory()
-        presenter.setMaxCount()
+        checkBuyOrSell()
         addSubviewsAndSetConstraints()
     }
     
@@ -104,11 +107,38 @@ class DetailViewController: UIViewController {
 //MARK: - command method
 
     @objc private func buy() {
-        
+        valueForTrade = textField.text ?? ""
+        textField.text = ""
+        guard let value = chechValueForBuy(value: valueForTrade) else { return }
+        presenter.setCountValueForBuy(value: value)
     }
     
     @objc private func sell() {
         
+    }
+    
+//MARK: - private support methods
+    
+    private func checkBuyOrSell() {
+        if indexPath.section == 1 {
+            presenter.setMaxCountForBuy()
+            sellButton.isEnabled = true
+            sellButton.layer.opacity = 0.5
+        } else {
+            buyButton.isEnabled = true
+            buyButton.layer.opacity = 0.5
+        }
+    }
+    
+    private func chechValueForBuy(value: String) -> Double? {
+        guard let valueDouble = Double(value) else { return nil }
+        if valueDouble > maxCountValue {
+            return nil
+        }
+        if valueDouble <= 0 {
+            return nil
+        }
+        return valueDouble
     }
 
 }
@@ -146,7 +176,8 @@ extension DetailViewController: DetailViewProtocol {
         }
     }
     
-    func presentMaxCount(maxCount: String) {
+    func presentMaxCountForBuy(maxCount: String) {
+        maxCountValue = Double(maxCount) ?? 0.0
         textField.placeholder = "max count: \(maxCount)"
     }
     

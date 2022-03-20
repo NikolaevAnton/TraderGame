@@ -44,6 +44,15 @@ class Storage {
         arrayYourCrypto
     }
     
+    func getYourMoneyInCurrentDay(name: String) -> ValueCrypto? {
+        for crypto in arrayYourCrypto {
+            if crypto.name == name {
+                return crypto
+            }
+        }
+        return nil
+    }
+    
     func getDayInCalendar(day: Int) -> Date {
         let check = 0..<364
         var seachDate = Date()
@@ -75,6 +84,30 @@ class Storage {
     func setChangeResult(values: [ValueCrypto], day: Int) {
         arrayValuesInCurrentDayOneYearHistory[day].values = values
     }
+    
+    func uppendNewValueInYouMoneyForBuy(value: ValueCrypto) {
+        if arrayYourCrypto.contains(where: { valueCrypto in
+            valueCrypto.name == value.name
+        }) {
+            print("dont call this func when crypto already in your wallet")
+            return
+        }
+        arrayYourCrypto.append(value)
+    }
+    
+    func changeValueInYourMoneyForBuy(value: ValueCrypto) {
+        for index in 0..<arrayYourCrypto.count {
+            if arrayYourCrypto[index].name == value.name {
+                if let countInCurrentCrypto = arrayYourCrypto[index].count {
+                    let summCount = value.count! + countInCurrentCrypto
+                    arrayYourCrypto[index].count = summCount
+                } else {
+                    arrayYourCrypto[index].count = value.count
+                }
+            }
+        }
+    }
+    
     
 //MARK: - create your money
     private func createYourMoney() {

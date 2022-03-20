@@ -12,6 +12,7 @@ protocol DetailViewProtocol: AnyObject {
     func presentChangeCourse(change: Double)
     func presentMaxCountForBuy(maxCount: String)
     func deleteOldValue()
+    func presentMaxCountForSell(maxCount: String)
 }
 
 protocol DetailPresenterProtocol {
@@ -22,10 +23,12 @@ protocol DetailPresenterProtocol {
     func getChangeHistory()
     func setMaxCountForBuy()
     func setCountValueForBuy(value: Double)
+    func setCountValueForSell(value: Double)
+    func setMaxCountForSell()
 }
 
 class DetailPresenter: DetailPresenterProtocol {
-    
+
     unowned let view: DetailViewProtocol
     private var isItYourWallet = true
     private var numberInArray = 0
@@ -85,6 +88,21 @@ class DetailPresenter: DetailPresenterProtocol {
         wallet.changeYouWalletForBuyCurrency(crypto: crypto, count: value)
         getCryptoValue()
         setMaxCountForBuy()
+    }
+    
+    func setCountValueForSell(value: Double) {
+        guard let crypto = crypto else { return }
+        print("DETAIL PRESENTER. count value for sell: \(value)")
+        view.deleteOldValue()
+        wallet.changeYouWalletForSellCurrency(crypto: crypto, count: value)
+        getCryptoValue()
+        setMaxCountForSell()
+    }
+    
+    func setMaxCountForSell() {
+        guard let crypto = crypto else { return }
+        let count = wallet.getCountCurrentCurrency(name: crypto.name)
+        view.presentMaxCountForSell(maxCount: "\(count)")
     }
 }
 

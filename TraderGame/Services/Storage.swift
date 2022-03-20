@@ -84,6 +84,15 @@ class Storage {
         arrayYourCrypto[0].count
     }
     
+    func getCountCryptoInYourWallet(nameCrypto: String) -> Decimal? {
+        for index in 0..<arrayYourCrypto.count {
+            if arrayYourCrypto[index].name == nameCrypto {
+                return arrayYourCrypto[index].count
+            }
+        }
+        return nil
+    }
+    
 //MARK: - Set change result
     func setChangeResult(values: [ValueCrypto], day: Int) {
         arrayValuesInCurrentDayOneYearHistory[day].values = values
@@ -112,6 +121,14 @@ class Storage {
         }
     }
     
+    func changeValueInYourMoneyForSell(name: String, count: Decimal) {
+        for index in 0..<arrayYourCrypto.count {
+            if arrayYourCrypto[index].name == name {
+                arrayYourCrypto[index].count! -= count
+            }
+        }
+    }
+    
     func changeDollarsCount(newCount: Decimal) {
         arrayYourCrypto[0].count = newCount
     }
@@ -120,6 +137,14 @@ class Storage {
         for index in 0..<arrayYourCrypto.count {
             if arrayYourCrypto[index].name == name {
                 arrayYourCrypto[index].price = price
+            }
+        }
+    }
+    
+    func delateCrypto(name: String) {
+        for index in 0..<arrayYourCrypto.count {
+            if arrayYourCrypto[index].name == name {
+                arrayYourCrypto.remove(at: index)
             }
         }
     }

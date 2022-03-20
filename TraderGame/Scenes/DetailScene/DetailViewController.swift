@@ -13,7 +13,8 @@ class DetailViewController: UIViewController {
     var indexPath: IndexPath!
     var day: String!
     private var valueForTrade = ""
-    private var maxCountValue = 0.0
+    private var maxCountValueBuy = 0.0
+    private var maxCountForSell = 0.0
    
 //MARK: - UI Elements
     private var infoLabel: UILabel = {
@@ -109,12 +110,15 @@ class DetailViewController: UIViewController {
     @objc private func buy() {
         valueForTrade = textField.text ?? ""
         textField.text = ""
-        guard let value = chechValueForBuy(value: valueForTrade) else { return }
+        guard let value = checkValueForBuy(value: valueForTrade) else { return }
         presenter.setCountValueForBuy(value: value)
     }
     
     @objc private func sell() {
-        
+        valueForTrade = textField.text ?? ""
+        textField.text = ""
+        guard let value = checkValueForSell(value: valueForTrade) else { return }
+        presenter.setCountValueForSell(value: value)
     }
     
 //MARK: - private support methods
@@ -125,14 +129,26 @@ class DetailViewController: UIViewController {
             sellButton.isEnabled = true
             sellButton.layer.opacity = 0.5
         } else {
+            presenter.setMaxCountForSell()
             buyButton.isEnabled = true
             buyButton.layer.opacity = 0.5
         }
     }
     
-    private func chechValueForBuy(value: String) -> Double? {
+    private func checkValueForBuy(value: String) -> Double? {
         guard let valueDouble = Double(value) else { return nil }
-        if valueDouble > maxCountValue {
+        if valueDouble > maxCountValueBuy {
+            return nil
+        }
+        if valueDouble <= 0 {
+            return nil
+        }
+        return valueDouble
+    }
+    
+    private func checkValueForSell(value: String) -> Double? {
+        guard let valueDouble = Double(value) else { return nil }
+        if valueDouble > maxCountForSell {
             return nil
         }
         if valueDouble <= 0 {
@@ -165,9 +181,7 @@ extension DetailViewController: DetailViewProtocol {
     }
     
     func presentChangeCourse(change: Double) {
-        print("presentChangeCourse \(change)")
         if change >= 0.0 {
-            print("rose")
             changeLabel.text?.append("currency rose by a percentage: \(change)")
             changeLabel.textColor = UIColor(named: "Green")
         } else {
@@ -177,12 +191,17 @@ extension DetailViewController: DetailViewProtocol {
     }
     
     func presentMaxCountForBuy(maxCount: String) {
-        maxCountValue = Double(maxCount) ?? 0.0
+        maxCountValueBuy = Double(maxCount) ?? 0.0
         textField.placeholder = "max count: \(maxCount)"
     }
     
     func deleteOldValue() {
         infoLabel.text = ""
+    }
+    
+    func presentMaxCountForSell(maxCount: String) {
+        maxCountForSell = Double(maxCount) ?? 0.0
+        textField.placeholder = "max count for sell: \(maxCount)"
     }
     
 }

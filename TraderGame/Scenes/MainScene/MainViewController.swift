@@ -54,7 +54,6 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
     
     private func addSubviewsAndSetConstraints() {
 
-
         view.addSubview(infoLabel)
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -70,10 +69,7 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70)
         ])
-        
-
     }
-
 
     private func createToolBar() {
         self.navigationController?.isToolbarHidden = false
@@ -117,7 +113,6 @@ extension MainViewController: UITableViewDataSource {
         var content = cell.defaultContentConfiguration()
         switch indexPath.section {
         case 0:
-            print(arrayValuesYoyMoney[indexPath.row])
             content.text = arrayValuesYoyMoney[indexPath.row]
         default:
             content.text = arrayValuesCrypto[indexPath.row]

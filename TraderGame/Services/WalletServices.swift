@@ -67,13 +67,6 @@ class WalletServices {
         guard var newCountDollars = sharedStorage.getCountDollars() else { return }
         newCountDollars += Decimal(count) * crypto.price
         print("WALLET SERVICES. new dollars count: \(newCountDollars)")
-        /*
-        if cryptoCount == 0 {
-            sharedStorage.changeDollarsCount(newCount: newCountDollars)
-            sharedStorage.delateCrypto(name: crypto.name)
-            return
-        }
-         */
         sharedStorage.changeDollarsCount(newCount: newCountDollars)
         sharedStorage.changeValueInYourMoneyForSell(name: crypto.name, count: Decimal(count))
     }

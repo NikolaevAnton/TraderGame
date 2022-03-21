@@ -37,7 +37,7 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
         createToolBar()
         self.presenter = MainPresenter(view: self)
         view.backgroundColor = UIColor(named: "LightGray")
-        presenter.loadValuesInCurrentDay()
+        presenter.loadCountValuesInCurrentDay()
         presenter.loadStringValuesCrypto()
         presenter.loadStringValueDate()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
@@ -47,7 +47,7 @@ class MainViewController: UIViewController, UINavigationBarDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        presenter.loadValuesInCurrentDay()
+        presenter.loadCountValuesInCurrentDay()
         presenter.loadStringValuesCrypto()
         tableView.reloadData()
     }

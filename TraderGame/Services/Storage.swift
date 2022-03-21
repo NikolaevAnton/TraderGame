@@ -141,9 +141,9 @@ class Storage {
         }
     }
     
-    func delateCrypto(name: String) {
+    func delateCrypto() {
         for index in 0..<arrayYourCrypto.count {
-            if arrayYourCrypto[index].name == name {
+            if arrayYourCrypto[index].count == Decimal(0) {
                 arrayYourCrypto.remove(at: index)
             }
         }

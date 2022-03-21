@@ -63,6 +63,10 @@ class CurrentDayServices {
         }
     }
     
+    func delateZerroCountValuesInYourWallet() {
+        sharedStorage.delateCrypto()
+    }
+    
     
 //MARK: - Sorting Values
     func ascendingOrder() {

@@ -15,7 +15,7 @@ protocol MainViewProtocol: AnyObject {
 
 protocol MainPresenterProtocol {
     init(view: MainViewProtocol)
-    func loadValuesInCurrentDay()
+    func loadCountValuesInCurrentDay()
     func loadStringValuesCrypto()
     func loadStringValueDate()
     func changeDay()
@@ -40,7 +40,8 @@ class MainPresenter: MainPresenterProtocol {
         self.view = view
     }
     
-    func loadValuesInCurrentDay() {
+    func loadCountValuesInCurrentDay() {
+        delateZeroValues()
         view.presentCountValuesInCurrentDay(
             countValuesYourCrypto: currentDayServices.getCountYourMoney(),
             countValuesInternetCrypto: currentDayServices.getCountCryptoValuesInCurrentDay(day: day)
@@ -48,6 +49,7 @@ class MainPresenter: MainPresenterProtocol {
     }
     
     func loadStringValuesCrypto() {
+        delateZeroValues()
         view.presentStringsValuesCrypto(
             valuesYouMoney: currentDayServices.getStringValuesInArrayYouMoney(),
             valuesCrypto: currentDayServices.getStringValuesInArrayCryptoData(in: day))
@@ -59,7 +61,7 @@ class MainPresenter: MainPresenterProtocol {
     
     func changePriceInYouWallet() {
         currentDayServices.changePrice(in: day)
-        loadValuesInCurrentDay()
+        loadCountValuesInCurrentDay()
         loadStringValuesCrypto()
     }
     
@@ -95,5 +97,9 @@ class MainPresenter: MainPresenterProtocol {
         case .withoutOrder:
             currentDayServices.withoutOrder()
         }
+    }
+    
+    private func delateZeroValues(){
+        currentDayServices.delateZerroCountValuesInYourWallet()
     }
 }

@@ -19,18 +19,17 @@ class Storage {
         createCalendar()
         createYourMoney()
         createValuesInCurrentDay()
-        
-        //getCryptoPriceInArrayAllValues()
-        //seachMinimumCryptoArray()
     }
     
 //MARK: - getter result analiz array AllValuesRateForCurrentCrypto
-    func getCountValuesCrypto(completion: @escaping(Int)->Void) {
-        getCryptoPriceInArrayAllValues()
-        seachMinimumCryptoArray()
-        guard let array = arrayValuesInCurrentDayOneYearHistory.first else { return }
-        //return array.values.count
-        completion(array.values.count)
+    func getCountValuesCrypto(completion: @escaping(Int) -> Void) {
+        DispatchQueue.main.async { [unowned self] in
+            getCryptoPriceInArrayAllValues()
+            seachMinimumCryptoArray()
+            guard let array = arrayValuesInCurrentDayOneYearHistory.first else { return }
+            print(array.values.count)
+            completion(array.values.count)
+        }
     }
     
     func getStorageInCurrentDay(numberOfDay: Int) -> [ValueCrypto] {
@@ -231,7 +230,6 @@ class Storage {
         }
         
         changeArrayValuesInCurrentDayOneYearHistory(arrayNames: tempValues)
-
     }
     
     private func transcryptValuesCryptoToString(thisDayArray: [ValueCrypto]) -> [String] {

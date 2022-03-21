@@ -19,14 +19,18 @@ class Storage {
         createCalendar()
         createYourMoney()
         createValuesInCurrentDay()
-        getCryptoPriceInArrayAllValues()
-        seachMinimumCryptoArray()
+        
+        //getCryptoPriceInArrayAllValues()
+        //seachMinimumCryptoArray()
     }
     
 //MARK: - getter result analiz array AllValuesRateForCurrentCrypto
-    func getCountValuesCrypto() -> Int {
-        guard let array = arrayValuesInCurrentDayOneYearHistory.first else { return 0}
-        return array.values.count
+    func getCountValuesCrypto(completion: @escaping(Int)->Void) {
+        getCryptoPriceInArrayAllValues()
+        seachMinimumCryptoArray()
+        guard let array = arrayValuesInCurrentDayOneYearHistory.first else { return }
+        //return array.values.count
+        completion(array.values.count)
     }
     
     func getStorageInCurrentDay(numberOfDay: Int) -> [ValueCrypto] {
@@ -152,15 +156,8 @@ class Storage {
     
 //MARK: - create your money
     private func createYourMoney() {
-        var price = Decimal()
-        var count = Decimal()
-        do {
-            price = try Decimal("1", format: .number)
-            count = try Decimal("10000", format: .number)
-        } catch {
-            price = Decimal()
-            count = Decimal()
-        }
+        let price = Decimal(1)
+        let count = Decimal(10000)
         let dollars = ValueCrypto(name: "Dollar", price: price, count: count)
         arrayYourCrypto.append(dollars)
     }

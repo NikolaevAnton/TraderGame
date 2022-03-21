@@ -30,8 +30,8 @@ class WalletServices {
         var changeCurrency = 0.0
         let numberOfDay = sharedStorage.getNumberDayInCalendar(day: date)
         let array = getCurrencyForCryptoForDay(name: name, numberDate: numberOfDay)
-        changeCurrency = (array[array.count - 1] - array[0]) / 100
-        return changeCurrency
+        changeCurrency = (array[array.count - 1] - array[0]) / array[array.count - 1]
+        return changeCurrency * 100
     }
     
     func getCountCurrentCurrency(name: String) -> Double {
@@ -59,14 +59,12 @@ class WalletServices {
     
     func changeYouWalletForSellCurrency(crypto: ValueCrypto, count: Double) {
         guard var cryptoCount = sharedStorage.getCountCryptoInYourWallet(nameCrypto: crypto.name) else { return }
-        print("WALLET SERVICES. current count crypto: \(cryptoCount)")
         cryptoCount = cryptoCount - Decimal(count)
         if cryptoCount < 0 {
             return
         }
         guard var newCountDollars = sharedStorage.getCountDollars() else { return }
         newCountDollars += Decimal(count) * crypto.price
-        print("WALLET SERVICES. new dollars count: \(newCountDollars)")
         sharedStorage.changeDollarsCount(newCount: newCountDollars)
         sharedStorage.changeValueInYourMoneyForSell(name: crypto.name, count: Decimal(count))
     }

@@ -174,7 +174,7 @@ extension SettingsViewController: SettingsViewProtocol {
     }
     
     func presentCountValuesInOneYearHistory(_ countValues: Int) {
-        activityIndicator.stopAnimating()
+        //activityIndicator.stopAnimating()
         downloadAllValuesInOneYearHistoryButton.layer.opacity = 0.5
         downloadAllValuesInOneYearHistoryButton.isEnabled = true
         infoAboutLoadValuesLabel.isHidden = false

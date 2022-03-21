@@ -175,7 +175,7 @@ extension DetailViewController: DetailViewProtocol {
     }
     
     func presentWallet(name: String, price: String, count: String) {
-        infoLabel.text?.append("YOU WALLET:\n")
+        infoLabel.text?.append("\nYOU WALLET:\n")
         infoLabel.text?.append("NAME: \(name)\n")
         infoLabel.text?.append("COUNT: \(count)")
     }

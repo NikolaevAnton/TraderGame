@@ -72,7 +72,8 @@ class DetailPresenter: DetailPresenterProtocol {
     }
     
     func getChangeHistory() {
-        view.presentChangeCourse(change: wallet.getChangeCurrency(name: crypto?.name ?? "", date: dayDate))
+        guard let crypto = crypto else { return }
+        view.presentChangeCourse(change: wallet.getChangeCurrency(name: crypto.name, date: dayDate))
     }
     
     func setMaxCountForBuy() {
@@ -92,7 +93,6 @@ class DetailPresenter: DetailPresenterProtocol {
     
     func setCountValueForSell(value: Double) {
         guard let crypto = crypto else { return }
-        print("DETAIL PRESENTER. count value for sell: \(value)")
         view.deleteOldValue()
         wallet.changeYouWalletForSellCurrency(crypto: crypto, count: value)
         getCryptoValue()
